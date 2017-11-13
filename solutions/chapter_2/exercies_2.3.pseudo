@@ -1,0 +1,4 @@
+if R1 < R2 then stop
+R3 <- R3 + 1
+R1 <- R1 - R2
+goto 1
