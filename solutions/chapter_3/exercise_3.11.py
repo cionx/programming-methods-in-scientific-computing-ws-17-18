@@ -5,7 +5,6 @@ def exp_approx(x):
     fac = 1         # n!
     if x >= 0:
         while fac < (3**x) * (x**(n+1)) * eps:
-            print(n)
             y += x**n / fac
             n += 1  
             fac *= n
@@ -16,4 +15,4 @@ def exp_approx(x):
             fac *= n
     return y
 
-# problems for x >= 23, x <= -26
+# problem for x >= 23 and x <= -26: summands become to small
