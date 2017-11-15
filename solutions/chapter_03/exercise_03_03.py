@@ -2,13 +2,13 @@ class matrix():
     def __init__(self, entries):
         m = len(entries)
         if m == 0:
-            raise ValueError("The height needs to be positive.")
+            raise ValueError("height must be positive")
         n = len(entries[0])
         if n == 0:
-            raise ValueError("The width needs to be positive.")
+            raise ValueError("width must be positive")
         for i in range(1, m):
             if len(entries[i]) != n:
-                raise ValueError("Rows need to have the same width.")
+                raise ValueError("rows must have the same width")
         self.height = m
         self.width = n
         self.entries = entries
@@ -30,7 +30,8 @@ class matrix():
                 if len(s) > maxlen:
                     maxlen = len(s)
             for i in range(self.height):
-                rows[i] += numbers[i] + " " * (maxlen - len(numbers[i])) + " "  # pad the entries if they are too short
+                # pad the entries if they are too short
+                rows[i] += numbers[i] + " " * (maxlen - len(numbers[i])) + " "
         s = ""
         for r in rows:
             s += r[:-1] + "]\n" # remove the unnecessary white space at the end of ech line
@@ -40,12 +41,12 @@ class matrix():
     def __mul__(self, other):
         if self.width != other.height:
             raise TypeError('matrix dimensions do not match')
-        entries = []    # entries of the new matrix
+        entries = []                            # entries of the new matrix
         for i in range(self.height):
             row = []
             for j in range(other.width):
-                s = 0   # current sum of the i-j-th entry
-                for k in range(self.width):
+                s = self[i][0] * other[0][j]    # starting sum, makes sure s has the right type
+                for k in range(1, self.width):
                     s += self[i][k] * other[k][j]
                 row.append(s)
             entries.append(row)
@@ -60,7 +61,13 @@ class matrix():
                     return False
         return True
 
-A = matrix([[0,1],[1,0],[1,1]])
-B = matrix([[1,2,3,4],[5,6,7,8]])
-C = matrix([[1,0],[0,1],[1,0],[0,1]])
-print(A * (B * C) == (A * B) * C)
+### Example:
+#
+#   >>> A = matrix([[0,1],[1,0],[1,1]])
+#   >>> B = matrix([[1,2,3,4],[5,6,7,8]])
+#   >>> C = matrix([[1,0],[0,1],[1,0],[0,1]])
+#   >>> print(A * (B * C) == (A * B) * C)
+#   True
+#
+###
+

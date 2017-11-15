@@ -24,26 +24,25 @@ class Polynomial:
         return self.coeff == other.coeff
     
     def derivative(self):
-        l = []
+        coeff = []
         for i in range(1,len(self.coeff)):
-            l.append(i * self.coeff[i])
-        return Polynomial(l)
+            coeff.append(i * self.coeff[i])
+        return Polynomial(coeff)
     
     def antiderivative(self):
-        l = [0]
+        coeff = [0]
         for i in range(len(self.coeff)):
-            l.append(self.coeff[i]/(i+1))
-        return Polynomial(l)
-        
+            coeff.append(self.coeff[i]/(i+1))
+        return Polynomial(coeff)
 
-class PolyRing(Polynomial):
-    def __mul__(self, other):
-        deg1, deg2 = len(self.coeff), len(other.coeff)
-        l = [0 for i in range(deg1 + deg2 - 1)]
-        for i in range(deg1):
-            for j in range(deg2):
-                l[i+j] += self.coeff[i] * other.coeff[j]
-        return PolyRing(l)
-
-p = PolyRing([1,2,3])
-p.antiderivative().derivative()
+### Example:
+#
+#   >>> p = Polynomial([1,2,3])
+#   >>> p.derivative().coeff
+#   [2, 6]
+#   >>> p.antiderivative().coeff
+#   [0, 1.0, 1.0, 1.0]
+#   >>> p.antiderivative().derivative().coeff
+#   [1.0, 2.0, 3.0]
+#
+###

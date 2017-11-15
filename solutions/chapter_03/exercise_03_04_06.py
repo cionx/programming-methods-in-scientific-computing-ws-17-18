@@ -1,59 +1,41 @@
 class Rational():
-    def __init__(self, num, denum = 1):
+    def __init__(self, num, denum = 1): # default denumerator is 1
         if type(num) != int:
             raise TypeError("numerator is no integer")
-        self.num = num
         if type(denum) != int:
             raise TypeError("denumerater is no integer")
         if denum == 0:
             raise ZeroDivisionError("denumerator is zero")
+        self.num = num        
         self.denum = denum
     
-    def __str__(self):
+    def __str__(self):  # allows print(A) for a matrix A
         return "{}/{}".format(self.num, self.denum)
     
     def __add__(self, other):
-        if type(other) == int:
-            return self + Rational(other)
-        elif type(other) == Rational:
-            return Rational( self.num * other.denum + self.denum * other.num, self.denum * other.denum )
-        raise TypeError("adding a nonrational number")
+        return Rational( self.num * other.denum + self.denum * other.num, self.denum * other.denum )
     
     def __sub__(self, other):
-        if type(other) == int:
-            return self - Rational(other)
-        elif type(other) == Rational:
-            return Rational( self.num * other.denum - self.denum * other.num, self.denum * other.num )
-        raise TypeError("subtracting a nonrational number")
+        Rational( self.num * other.denum - self.denum * other.num, self.denum * other.num )
     
     def __neg__(self):
         return Rational( -self.num, self.denum )
     
     def __mul__(self, other):
-        if type(other) == int:
-            return self * Rational(other)
-        elif type(other) == Rational:
-            return Rational( self.num * other.num, self.denum * other.denum )
-        raise TypeError("multiplying with a nonrational number")
+        return Rational( self.num * other.num, self.denum * other.denum )
     
     def __truediv__(self, other):
-        if type(other) == int:
-            return self / Rational(other)
-        elif type(other) == Rational:
-            if other.num == 0:
-                raise ZeroDivisionError("division by zero")
-            return Rational( self.num * other.denum, self.denum * other.num)
-        raise TypeError("dividing by a nonrational number")
+        if other.num == 0:
+            raise ZeroDivisionError("division by zero")
+        return Rational( self.num * other.denum, self.denum * other.num)
     
-    def inverse(self):
+    def inverse(self):  # short hand notation
         return Rational(1)/self
     
     def __eq__(self, other):
-        if type(other) == int:
+        if type(other) == int:  # allowing comparison to int, useful for x == 0
             return (self == Rational(other))
-        elif type(other) == Rational:
-            return (self.num * other.denum == self.denum * other.num)
-        raise TypeError("comparing with a nonrational number")
+        return (self.num * other.denum == self.denum * other.num)
     
     def __float__(self):
         return self.num / self.denum
@@ -169,15 +151,6 @@ def copymatrix(A):  # copies a matrix
 
 
 
-#A = matrix([[1,2],[3,4]])
-#print(A)
-#A.map(Rational)
-#print(A)
-#A.addrow(1, 0, Rational(1,3))
-#print(A)
-#A.map(float)
-#print(A)
-
 
 
 ### Exercise 3.4
@@ -186,7 +159,7 @@ def naive_lu(A):
     if A.height != A.width:
         raise ValueError("matrix is not square")
     U = copymatrix(A)   # circumvent pass by reference
-    n = B.height
+    n = U.height
     L = identitymatrix(n)
     U.map(Rational)     # make all
     L.map(Rational)   # entries rational
@@ -201,6 +174,11 @@ def naive_lu(A):
 
 A = matrix([[3,2,1],[6,6,3],[9,10,6]])
 (L,U) = naive_lu(A)
+print(L)
+print(U)
+B = L*U
+B.map(float)
+print(B)
 
 B = matrix([[0,1],[1,0]])
 (L,U) == naive_lu(B)
