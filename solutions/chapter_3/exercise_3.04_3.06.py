@@ -248,5 +248,3 @@ def invert(A):
 
 A = matrix([[3,-1,2],[-3,4,-1],[-6,5,-2]])
 B = invert(A)
-B.map(float)
-print( B )
