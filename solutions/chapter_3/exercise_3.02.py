@@ -46,4 +46,4 @@ class PolyRing(Polynomial):
         return PolyRing(l)
 
 p = PolyRing([1,2,3])
-p.antiderivative().derivative() == p    # dangerous: compares int to float
+p.antiderivative().derivative()
