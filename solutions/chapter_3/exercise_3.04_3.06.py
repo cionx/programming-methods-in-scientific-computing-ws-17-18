@@ -154,8 +154,6 @@ def zeromatrix(height, width):  # creates a zero matrix
         entries.append([0]*width)
     return matrix(entries)
 
-
-
 def identitymatrix(size):   # creates an identiy matrix
     E = zeromatrix(size, size)
     for i in range(size):
