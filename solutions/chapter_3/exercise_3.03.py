@@ -12,24 +12,20 @@ class matrix():
         self.height = m
         self.width = n
         self.entries = entries
-        
-    #def __str__(self):
-        #s = ""
-        #for i in range(self.height):
-            #s += "["
-            #for j in range(self.width):
-                #s += "{} ".format(self.entries[i][j])
-            #s = s[:-1]  # remove unnecessary whitespace at the end of a row
-            #s += "]\n"   # remove empty line at the end of the matrix
-        #s = s[:-1]
-        #return s
+    
+    def __getitem__(self, i):   # allows to get the rows via A[i]
+        return self.entries[i]
+    
+    def __setitem__(self, i, k):    # allows to set rows via A[i]
+        self.entries[i] = k
+    
     def __str__(self):
         rows = ["["]*self.height
         for j in range(self.width): # build the output columnwise
             numbers = []            # the numbers to appear in the j-th column
             maxlen = 0              # the maximal length of a number in the j-th column
             for i in range(self.height):
-                s = str(self.entries[i][j])
+                s = str(self[i][j])
                 numbers.append(s)
                 if len(s) > maxlen:
                     maxlen = len(s)
@@ -50,7 +46,7 @@ class matrix():
             for j in range(other.width):
                 s = 0   # current sum of the i-j-th entry
                 for k in range(self.width):
-                    s += self.entries[i][k] * other.entries[k][j]
+                    s += self[i][k] * other[k][j]
                 row.append(s)
             entries.append(row)
         return matrix(entries)
@@ -60,7 +56,7 @@ class matrix():
                 return False
         for i in range(self.height):
             for j in range(self.width):
-                if self.entries[i][j] != other.entries[i][j]:
+                if self[i][j] != other[i][j]:
                     return False
         return True
 
