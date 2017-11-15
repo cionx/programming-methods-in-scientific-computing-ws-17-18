@@ -35,6 +35,8 @@ class Polynomial:
             coeff.append(self.coeff[i]/(i+1))
         return Polynomial(coeff)
 
+
+
 ### Example:
 #
 #   >>> p = Polynomial([1,2,3])

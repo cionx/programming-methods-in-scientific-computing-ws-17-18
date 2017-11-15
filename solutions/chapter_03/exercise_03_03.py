@@ -22,8 +22,8 @@ class matrix():
     def __str__(self):
         rows = ["["]*self.height
         for j in range(self.width): # build the output columnwise
-            numbers = []            # the numbers to appear in the j-th column
-            maxlen = 0              # the maximal length of a number in the j-th column
+            numbers = []            # numbers to appear in column j
+            maxlen = 0              # maximal length of a number in column j
             for i in range(self.height):
                 s = str(self[i][j])
                 numbers.append(s)
@@ -31,26 +31,26 @@ class matrix():
                     maxlen = len(s)
             for i in range(self.height):
                 # pad the entries if they are too short
-                rows[i] += numbers[i] + " " * (maxlen - len(numbers[i])) + " "
+                rows[i] += numbers[i] + " "*(maxlen-len(numbers[i])) + " "
         s = ""
         for r in rows:
-            s += r[:-1] + "]\n" # remove the unnecessary white space at the end of ech line
-        s = s[:-1]              # remove an empty line at the end
+            s += r[:-1] + "]\n" # remove white space at the end of ech line
+        s = s[:-1]              # remove empty line at the end
         return s
     
     def __mul__(self, other):
         if self.width != other.height:
             raise TypeError('matrix dimensions do not match')
-        entries = []                            # entries of the new matrix
+        newentries = []
         for i in range(self.height):
             row = []
             for j in range(other.width):
-                s = self[i][0] * other[0][j]    # starting sum, makes sure s has the right type
+                s = self[i][0] * other[0][j]    # s has the right type
                 for k in range(1, self.width):
                     s += self[i][k] * other[k][j]
                 row.append(s)
-            entries.append(row)
-        return matrix(entries)
+            newentries.append(row)
+        return matrix(newentries)
     
     def __eq__(self, other):
         if self.height != other.height or self.width != other.width:
