@@ -1,0 +1,28 @@
+\usepackage{fontspec}
+\usepackage{listings}
+
+\renewcommand{\thechapter}{Chapter \arabic{chapter}:}
+\renewcommand{\thesection}{Exercise \arabic{chapter}.\arabic{section}}
+
+\newfontfamily\listingsfont{DejaVu Sans Mono}
+
+\lstdefinestyle{pythoncode}{
+  numbers           = left,
+  stepnumber        = 1,
+  numbersep         = 5pt,
+  language          = Python,
+  basicstyle        = \footnotesize\listingsfont,
+  showstringspaces  = false,
+  frame             = single
+}
+
+\lstnewenvironment{consoleoutput}{
+  \lstset{
+    numbers           = left,
+    stepnumber        = 1,
+    numbersep         = 5pt,
+    basicstyle        = \footnotesize\listingsfont,
+    showstringspaces  = false,
+    frame             = single
+  }
+}{}
