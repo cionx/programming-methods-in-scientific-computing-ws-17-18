@@ -1,1 +1,64 @@
-\addtocounter{section}{1}
+\section{}
+\label{section: LU decomposition}
+
+We first implement a class \texttt{Rational} to allow calculations with rational numbers with arbitrary precision.
+
+\lstinputlisting[style=pythoncode, firstline = 3, lastline = 43]{chapter_03/exercise_03_04.py}
+
+Next we extend the previous \texttt{matrix} class.
+
+\lstinputlisting[style=pythoncode, firstline = 47, lastline = 132]{chapter_03/exercise_03_04.py}
+
+We also define some auxiliary matrix functions:
+
+\lstinputlisting[style=pythoncode, firstline = 138, lastline = 155]{chapter_03/exercise_03_04.py}
+
+The LU decomposition of some matrices can be computed by the following naive algorithm:
+
+\lstinputlisting[style=pythoncode, firstline = 161, lastline = 176]{chapter_03/exercise_03_04.py}
+
+For the given matrix
+\[
+    A
+    = \begin{pmatrix}
+        3 &  2 & 1  \\
+        6 &  6 & 3  \\
+        9 & 10 & 6
+      \end{pmatrix}
+\]
+we get the following result:
+\begin{consoleoutput}
+>>> A = matrix([[3,2,1],[6,6,3],[9,10,6]])
+>>> (L,U) = naive_lu(A)
+>>> print(L)
+[9/9  0/18  0/1]
+[18/9 18/18 0/1]
+[27/9 36/18 1/1]
+>>> print(U)
+[3/1   2/1   1/1    ]
+[0/3   6/3   3/3    ]
+[0/162 0/162 162/162]
+>>> B = L*U
+>>> B.map(float)
+>>> print(B)
+[3.0 2.0  1.0]
+[6.0 6.0  3.0]
+[9.0 10.0 6.0]
+\end{consoleoutput}
+For the given matrix
+\[
+    B
+    = \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+      \end{pmatrix}
+\]
+(which has no LU decomposition) the program stops with an error:
+\begin{consoleoutput}
+>>> B = matrix([[0,1],[1,0]])
+>>> (L,U) == naive_lu(B)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 12, in naive_lu
+ValueError: algorithm does not work for this matrix
+\end{consoleoutput}

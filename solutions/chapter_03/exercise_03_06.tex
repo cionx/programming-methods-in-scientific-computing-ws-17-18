@@ -1,1 +1,29 @@
-\addtocounter{section}{1}
+\section{}
+
+We use the classes \texttt{Rational} and \texttt{matrix} as in \ref{section: LU decomposition}, as well as the auxiliary functions.
+We can then use the Gauß algorithm:
+
+\lstinputlisting[style=pythoncode, firstline = 160, lastline = 190]{chapter_03/exercise_03_06.py}
+
+For the given matrix
+\[
+  A
+  = \begin{pmatrix*}[r]
+       3  & -1  &  2  \\
+      -3  &  4  & -1  \\
+      -6  &  5  & -2
+    \end{pmatrix*}
+\]
+this results in the following output:
+\begin{consoleoutput}
+>>> A = matrix([[3,-1,2],[-3,4,-1],[-6,5,-2]])
+>>> B = invert(A)
+>>> A.map(Rational)
+>>> A*B == identitymatrix(3)
+True
+>>> B.map(float)
+>>> print(B)
+[-0.3333333333333333 0.8888888888888888 -0.7777777777777778]
+[0.0                 0.6666666666666666 -0.3333333333333333]
+[1.0                 -1.0               1.0                ]
+\end{consoleoutput}

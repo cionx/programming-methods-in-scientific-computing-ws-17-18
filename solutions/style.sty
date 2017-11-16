@@ -1,3 +1,4 @@
+\usepackage{amsmath, amssymb, mathtools}
 \usepackage{fontspec}
 \usepackage{listings}
 
@@ -5,6 +6,7 @@
 \renewcommand{\thesection}{Exercise \arabic{chapter}.\arabic{section}}
 
 \newfontfamily\listingsfont{DejaVu Sans Mono}
+\setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
 
 \lstdefinestyle{pythoncode}{
   numbers           = left,
@@ -13,7 +15,8 @@
   language          = Python,
   basicstyle        = \footnotesize\listingsfont,
   showstringspaces  = false,
-  frame             = single
+  frame             = single,
+  breaklines        = true
 }
 
 \lstnewenvironment{consoleoutput}{
