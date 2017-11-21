@@ -1,4 +1,4 @@
-class matrix():
+class Matrix():
     def __init__(self, entries):
         m = len(entries)
         if m == 0:
@@ -13,15 +13,15 @@ class matrix():
         self.width = n
         self.entries = entries
     
-    def __getitem__(self, i):   # allows to get the rows via A[i]
+    def __getitem__(self, i):       # allows to get the rows via A[i]
         return self.entries[i]
     
     def __setitem__(self, i, k):    # allows to set rows via A[i]
         self.entries[i] = k
     
-    def __str__(self):
+    def __str__(self):              # allows print(A) for a Matrix A
         rows = ["["]*self.height
-        for j in range(self.width): # build the output columnwise
+        for j in range(self.width): # construct output columnwise, align left
             numbers = []            # numbers to appear in column j
             maxlen = 0              # maximal length of a number in column j
             for i in range(self.height):
@@ -45,12 +45,12 @@ class matrix():
         for i in range(self.height):
             row = []
             for j in range(other.width):
-                s = self[i][0] * other[0][j]    # s has the right type
+                s = self[i][0] * other[0][j]    # makes s have the right type
                 for k in range(1, self.width):
                     s += self[i][k] * other[k][j]
                 row.append(s)
             newentries.append(row)
-        return matrix(newentries)
+        return Matrix(newentries)
     
     def __eq__(self, other):
         if self.height != other.height or self.width != other.width:
@@ -61,13 +61,14 @@ class matrix():
                     return False
         return True
 
+
+
 ### Example:
 #
-#   >>> A = matrix([[0,1],[1,0],[1,1]])
-#   >>> B = matrix([[1,2,3,4],[5,6,7,8]])
-#   >>> C = matrix([[1,0],[0,1],[1,0],[0,1]])
+#   >>> A = Matrix([[0,1],[1,0],[1,1]])
+#   >>> B = Matrix([[1,2,3,4],[5,6,7,8]])
+#   >>> C = Matrix([[1,0],[0,1],[1,0],[0,1]])
 #   >>> print(A * (B * C) == (A * B) * C)
 #   True
 #
 ###
-

@@ -1,15 +1,15 @@
 def exp_approx(x):
-    y = 1           # current approx
-    eps = 10**6     # 1/precision
+    y = 1       # current approx
+    d = 6       # number of digits
     n = 1
-    fac = 1         # n!
+    fac = 1     # n!
     if x >= 0:
-        while fac < (3**x) * (x**(n+1)) * eps:
+        while fac < (3**x) * (x**(n+1)) * 10**d
             y += x**n / fac
             n += 1  
             fac *= n
     if x < 0:
-        while fac < ((-x)**(n+1)) * eps:
+        while fac < ((-x)**(n+1)) * 10**d:
             y += x**n / fac
             n += 1  
             fac *= n

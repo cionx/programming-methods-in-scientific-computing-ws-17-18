@@ -1,9 +1,7 @@
 # Exercise 3.12 (1)
 
-class TimeOutError(Error):
+class TimeOutError(Exception):
     pass
-    def __init__(self, message):
-        self.message = message
 
 def newton(f, f_prime, x):
     n = 1
@@ -20,8 +18,15 @@ def newton(f, f_prime, x):
         n += 1
     raise TimeOutError("the calculation takes too long")
 
-# Exercise 3.12 (2)
 
-print( newton( (lambda x: x**2 - 2), (lambda x: 2*x), 1) )
 
-# Die ersten 15 Nachkommastellen stimmen mit dem exakten Ergebnis überein.
+### Exercise 3.12 (2)
+#
+#   >>> f = (lambda x: x**2 - 2)
+#   >>> fprime = (lambda x: 2*x)
+#   >>> print( newton(f, fprime, 1) )
+#   1.4142135623730951
+#
+#   Die ersten 15 Nachkommastellen stimmen mit dem exakten Ergebnis überein.
+#
+###

@@ -1,5 +1,3 @@
-from math import sin, pi
-
 # Exercise 3.8 (1)
 
 def trapeze(f,a,b,n):
@@ -10,12 +8,17 @@ def trapeze(f,a,b,n):
     integral = (b-a)*integral/n/2
     return integral
 
-# Exercise 3.8 (2)
-
-n = 1
-s = 0
-while 2 - s >= 1.E-6:           # sin is concave on the interval -> estimate always to small
-    n += 1                      # can skip n = 1 because it results in 0
-    s = trapeze(sin, 0, pi, n)
-
-print(s)
+### Exercise 3.8 (2)
+#
+#   >>> from math import sin, pi
+#   >>> n = 1
+#   >>> s = 0
+#   >>> while 2 - s >= 1.E-6:   # sin is concave on [0,pi] -> estimate too small
+#   ...     n += 1              # can skip n = 1 because it results in 0
+#   ...     s = trapeze(sin, 0, pi, n)
+#   ... 
+#   
+#   >>> print(s)
+#   1.9999990007015205
+#
+###

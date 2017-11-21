@@ -1,7 +1,7 @@
 ### CLASSES
 
 class Rational():
-    def __init__(self, num, denum = 1): # default denumerator is 1
+    def __init__(self, num, denum = 1):   # default denumerator is 1
         if type(num) != int:
             raise TypeError("numerator is no integer")
         if type(denum) != int:
@@ -11,14 +11,14 @@ class Rational():
         self.num = num        
         self.denum = denum
     
-    def __str__(self):  # allows print(A) for a matrix A
+    def __str__(self):    # allows print(x) for Rational x
         return "{}/{}".format(self.num, self.denum)
     
     def __add__(self, other):
         return Rational( self.num * other.denum + self.denum * other.num, self.denum * other.denum )
     
     def __sub__(self, other):
-        Rational( self.num * other.denum - self.denum * other.num, self.denum * other.num )
+        return Rational( self.num * other.denum - self.denum * other.num, self.denum * other.num )
     
     def __neg__(self):
         return Rational( -self.num, self.denum )
@@ -44,7 +44,7 @@ class Rational():
 
 
 
-class matrix():
+class Matrix():
     def __init__(self, entries):
         m = len(entries)
         if m == 0:
@@ -96,28 +96,23 @@ class matrix():
                     s += self[i][k] * other[k][j]
                 row.append(s)
             entries.append(row)
-        return matrix(entries)
+        return Matrix(entries)
     
     def __eq__(self, other):
         if self.height != other.height or self.width != other.width:
-                return False
+                return False2
         for i in range(self.height):
             for j in range(self.width):
                 if self[i][j] != other[i][j]:
                     return False
         return True
     
-    def map(self, f):   # applies a function to all entries
+    def mapentries(self, f):        # applies a function to all entries
+        A = zeromatrix(self.height, self.width) # zeromatrix is defined below
         for i in range(self.height):
             for j in range(self.width):
-                self[i][j] = f(self[i][j])
-    
-    def swaprows(self, i, j):       # swap rows i and j
-        if i > self.height or j > self.height:
-            raise ValueError("swap nonexistent rows")
-        l = self[i]
-        self[i] = self[j]
-        self[j] = l
+                A[i][j] = f(self[i][j])
+        return A
     
     def addrow(self, i, j, c=1):    # add c times row j to row i
         for k in range(self.width):
@@ -126,10 +121,6 @@ class matrix():
     def addcolumn(self, i, j, c=1): # add c times column j from colunm i
         for k in range(self.height):
             self[k][i] = self[k][i] + self[k][j] * c
-    
-    def multrow(self, i, c):        # multiply row i with c
-        for j in range(self.width):
-            self[i][j] *= c
 
 
 
@@ -139,15 +130,15 @@ def zeromatrix(height, width):  # creates a zero matrix
     entries = []
     for i in range(height):
         entries.append([0]*width)
-    return matrix(entries)
+    return Matrix(entries)
 
-def identitymatrix(size):   # creates an identiy matrix
+def identitymatrix(size):       # creates an identiy matrix
     E = zeromatrix(size, size)
     for i in range(size):
         E[i][i] = 1
     return E
 
-def copymatrix(A):  # copies a matrix
+def copymatrix(A):              # forcefully copies a matrix
     B = zeromatrix(A.height, A.width)
     for i in range(A.height):
         for j in range(A.width):
@@ -158,15 +149,15 @@ def copymatrix(A):  # copies a matrix
 
 ### PRIMARY FUNCTION
 
-def naive_lu(A):
+def naive_lu(A):  # expects integer valued matrix as input
     if A.height != A.width:
         raise ValueError("matrix is not square")
-    U = copymatrix(A) # circumvent pass by reference
+    U = copymatrix(A)   # circumvent pass by reference
     n = U.height
     L = identitymatrix(n)
-    U.map(Rational)   # make all
-    L.map(Rational)   # entries rational
-    # bring U in upper triangular form, change L such that LU = A
+    U = U.mapentries(Rational)   # make all
+    L = L.mapentries(Rational)   # entries rational
+    # bring U in upper triangular form, change L such that always LU = A
     for j in range(n):
         if U[j][j] == 0:
             raise ValueError("algorithm does not work for this matrix")
@@ -175,15 +166,29 @@ def naive_lu(A):
             U.addrow(i, j, -U[i][j]/U[j][j])
     return (L,U)
 
-A = matrix([[3,2,1],[6,6,3],[9,10,6]])
-(L,U) = naive_lu(A)
-print(L)
-print(U)
-B = L*U
-B.map(float)
-print(B)
 
-B = matrix([[0,1],[1,0]])
-(L,U) == naive_lu(B)
-
-
+### EXAMPLES
+#
+#   >>> A = Matrix([[3,2,1],[6,6,3],[9,10,6]])
+#   >>> (L,U) = naive_lu(A)
+#   >>> print(L)
+#   [9/9  0/18  0/1]
+#   [18/9 18/18 0/1]
+#   [27/9 36/18 1/1]
+#   >>> print(U)
+#   [3/1   2/1   1/1    ]
+#   [0/3   6/3   3/3    ]
+#   [0/162 0/162 162/162]
+#   >>> print( (L*U).mapentries(float) )
+#   [3.0 2.0  1.0]
+#   [6.0 6.0  3.0]
+#   [9.0 10.0 6.0]
+#
+#   >>> B = Matrix([[0,1],[1,0]])
+#   >>> (L,U) == naive_lu(B)
+#   Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+#   File "<stdin>", line 12, in naive_lu
+#   ValueError: algorithm does not work for this matrix
+#
+###

@@ -44,7 +44,7 @@ class Rational():
 
 
 
-class matrix():
+class Matrix():
     def __init__(self, entries):
         m = len(entries)
         if m == 0:
@@ -95,7 +95,7 @@ class matrix():
                     s += self[i][k] * other[k][j]
                 row.append(s)
             entries.append(row)
-        return matrix(entries)
+        return Matrix(entries)
     
     def __eq__(self, other):
         if self.height != other.height or self.width != other.width:
@@ -106,29 +106,27 @@ class matrix():
                     return False
         return True
     
-    def map(self, f):   # applies a function to all entries
+    def mapentries(self, f):        # applies a function to all entries
+        A = zeromatrix(self.height, self.width) # zeromatrix is defined below
         for i in range(self.height):
             for j in range(self.width):
-                self[i][j] = f(self[i][j])
+                A[i][j] = f(self[i][j])
+        return A
     
-    def swaprows(self, i, j):   # swap rows i and j
+    def addrow(self, i, j, c=1):    # add c times row j to row i
+        for k in range(self.width):
+            self[i][k] = self[i][k] + self[j][k] * c
+    
+    def multrow(self, i, c):        # multiply row i with c
+        for j in range(self.width):
+            self[i][j] *= c
+    
+    def swaprows(self, i, j):       # swap rows i and j
         if i > self.height or j > self.height:
             raise ValueError("swap nonexistent rows")
         l = self[i]
         self[i] = self[j]
         self[j] = l
-    
-    def addrow(self, i, j, c=1): # add c times row j to row i
-        for k in range(self.width):
-            self[i][k] = self[i][k] + self[j][k] * c
-    
-    def addcolumn(self, i, j, c=1): # add c times column j from colunm i
-        for k in range(self.height):
-            self[k][i] = self[k][i] + self[k][j] * c
-    
-    def multrow(self, i, c):    # multiply row i with c
-        for j in range(self.width):
-            self[i][j] *= c
 
 
 
@@ -138,7 +136,7 @@ def zeromatrix(height, width):  # creates a zero matrix
     entries = []
     for i in range(height):
         entries.append([0]*width)
-    return matrix(entries)
+    return Matrix(entries)
 
 def identitymatrix(size):   # creates an identiy matrix
     E = zeromatrix(size, size)
@@ -157,15 +155,15 @@ def copymatrix(A):  # copies a matrix
 
 ### PRIMARY FUNCTION
 
-# allowed input are integer matrices
-def invert(A):
+
+def invert(A):      # allowed input are integer matrices
     if A.height != A.width:
         raise ValueError("matrix is not square")
     B = copymatrix(A)   # circumvent pass by reference
     n = B.height
     Inv = identitymatrix(n)
-    B.map(Rational)     # make all
-    Inv.map(Rational)   # entries rational
+    B = B.mapentries(Rational)      # make all
+    Inv = Inv.mapentries(Rational)  # entries rational
     # bring B in lower triangular form
     for j in range(n):
         p = -1
@@ -189,9 +187,8 @@ def invert(A):
             B.addrow(i, j, -B[i][j])
     return Inv
 
-A = matrix([[3,-1,2],[-3,4,-1],[-6,5,-2]])
+A = Matrix([[3,-1,2],[-3,4,-1],[-6,5,-2]])
 B = invert(A)
-A.map(Rational)
-A*B == identitymatrix(3)
-B.map(float)
-print(B)
+A = A.mapentries(Rational)
+print(A*B == identitymatrix(3))
+print(B.mapentries(float))
