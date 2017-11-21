@@ -1,5 +1,8 @@
 *.aux
+*.kate-swp
 *.log
 *.synctex.gz
+*.toc
+*__pycache__*
 Script*.pdf
 Source*.py
