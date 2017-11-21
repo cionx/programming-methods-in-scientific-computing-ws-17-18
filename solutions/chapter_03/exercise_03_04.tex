@@ -1,23 +1,25 @@
 \section{}
 \label{section: LU decomposition}
 
-We first implement a class \texttt{Rational} to allow calculations with rational numbers with arbitrary precision.
+Wir schreiben zunächst eine Klasse \texttt{Rational}, die ein genaues Rechnen mit rationalen Zahlen erlaubt.
 
 \lstinputlisting[style=pythoncode, firstline = 3, lastline = 43]{chapter_03/exercise_03_04.py}
 
-Next we extend the previous \texttt{matrix} class.
+Wir erweitern nun die bisherige \texttt{Matrix}-Klasse um weitere Methoden.
+(Aus Platzgründen kopieren wir den bereits vorhandenen Code nicht noch einmal.)
 
-\lstinputlisting[style=pythoncode, firstline = 47, lastline = 132]{chapter_03/exercise_03_04.py}
+\lstinputlisting[style=pythoncode, firstline = 110, lastline = 123]{chapter_03/exercise_03_04.py}
 
-We also define some auxiliary matrix functions:
+Wir nutzen im Folgenden auch einige Hilfsfunktionen, um den Umgang mit Matrizen zu erleichtern.
+(Dies sind keine zusätzlichen Methoden der Klasse \texttt{Matrix}.)
 
-\lstinputlisting[style=pythoncode, firstline = 138, lastline = 155]{chapter_03/exercise_03_04.py}
+\lstinputlisting[style=pythoncode, firstline = 129, lastline = 146]{chapter_03/exercise_03_04.py}
 
-The LU decomposition of some matrices can be computed by the following naive algorithm:
+Die LU-Zerlegung von passenden Matrix mit ganzzahligen Einträgen kann nun dem folgenden naiven Algorithmus berechnet werden:
 
-\lstinputlisting[style=pythoncode, firstline = 161, lastline = 176]{chapter_03/exercise_03_04.py}
+\lstinputlisting[style=pythoncode, firstline = 152, lastline = 167]{chapter_03/exercise_03_04.py}
 
-For the given matrix
+Für die gegebene Matrix
 \[
     A
     = \begin{pmatrix}
@@ -26,9 +28,9 @@ For the given matrix
         9 & 10 & 6
       \end{pmatrix}
 \]
-we get the following result:
+erhalten wir das folgende Ergebnis:
 \begin{consoleoutput}
->>> A = matrix([[3,2,1],[6,6,3],[9,10,6]])
+>>> A = Matrix([[3,2,1],[6,6,3],[9,10,6]])
 >>> (L,U) = naive_lu(A)
 >>> print(L)
 [9/9  0/18  0/1]
@@ -38,14 +40,12 @@ we get the following result:
 [3/1   2/1   1/1    ]
 [0/3   6/3   3/3    ]
 [0/162 0/162 162/162]
->>> B = L*U
->>> B.map(float)
->>> print(B)
+>>> print( (L*U).mapentries(float) )
 [3.0 2.0  1.0]
 [6.0 6.0  3.0]
 [9.0 10.0 6.0]
 \end{consoleoutput}
-For the given matrix
+Für die gegebene Matrix
 \[
     B
     = \begin{pmatrix}
@@ -53,9 +53,9 @@ For the given matrix
         1 & 0
       \end{pmatrix}
 \]
-(which has no LU decomposition) the program stops with an error:
+(welche keine LU-Zerlegung besitzt) bricht das Programm mit einem Fehler ab.
 \begin{consoleoutput}
->>> B = matrix([[0,1],[1,0]])
+>>> B = Matrix([[0,1],[1,0]])
 >>> (L,U) == naive_lu(B)
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>

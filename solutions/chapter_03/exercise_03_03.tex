@@ -1,17 +1,14 @@
-\addtocounter{section}{1}
-
 \section{}
 
 \lstinputlisting[style=pythoncode, firstline=1, lastline=62]{chapter_03/exercise_03_03.py}
 
-For the matrices
-
+Für die Matrixassoziativität erhalten wir das Folgende:
 
 \begin{consoleoutput}
-    >>> A = matrix([[0,1],[1,0],[1,1]])
-    >>> B = matrix([[1,2,3,4],[5,6,7,8]])
-    >>> C = matrix([[1,0],[0,1],[1,0],[0,1]])
-    >>> A * (B * C) == (A * B) * C
+    >>> A = Matrix([[0,1],[1,0],[1,1]])
+    >>> B = Matrix([[1,2,3,4],[5,6,7,8]])
+    >>> C = Matrix([[1,0],[0,1],[1,0],[0,1]])
+    >>> print(A * (B * C) == (A * B) * C)
     True
 \end{consoleoutput}
 

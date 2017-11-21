@@ -1,6 +1,7 @@
 \section{}
 
-We extend the given class \texttt{Polynomial} by functions for the derivative and antiderivative:
+Wir weitern die gegeben Klasse \texttt{Polynomial} um Methoden zum Ableiten, sowie Bilden einer Stammfunktion.
+Dabei wählen wir die \enquote{Integrationskonstante} als $0$.
 
 \lstinputlisting[style=pythoncode, firstline=1, lastline=36]{chapter_03/exercise_03_02.py}
 
@@ -43,7 +44,7 @@ We extend the given class \texttt{Polynomial} by functions for the derivative an
 %         return Polynomial(l)
 % \end{pythonlisting}
 
-For the given polynomial $p(x) = 3 x^2 + 2 x + 1$ we get the following results:
+Für das gegebene Polynom $p(x) = 3 x^2 + 2 x + 1$ erhalten wir die folgenden Ergebnisse:
 
 \begin{consoleoutput}
     >>> p = Polynomial([1,2,3])

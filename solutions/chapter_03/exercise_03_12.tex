@@ -1,1 +1,31 @@
-\addtocounter{section}{1}
+\section{}
+
+
+
+
+
+\subsection{}
+
+Wir definieren eine Klasse \texttt{TimeOutError}:
+
+\lstinputlisting[style=pythoncode, firstline = 3, lastline = 4]{chapter_03/exercise_03_12.py}
+
+Wir implementieren das Newton-Verfahren für mit der gewünschten Genauigkeit:
+
+\lstinputlisting[style=pythoncode, firstline = 6, lastline = 19]{chapter_03/exercise_03_12.py}
+
+
+
+
+
+\subsection{}
+
+Wir erhalten das folgende Ergebnis:
+
+\begin{consoleoutput}
+>>> f = (lambda x: x**2 - 2)
+>>> fprime = (lambda x: 2*x)
+>>> print( newton(f, fprime, 1) )
+1.4142135623730951
+\end{consoleoutput}
+Die ersten $15$ Nachkommestellen stimmen mit dem exakten Ergebnis überein.

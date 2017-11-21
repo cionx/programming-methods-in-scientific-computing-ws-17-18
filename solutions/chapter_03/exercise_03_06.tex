@@ -1,11 +1,15 @@
 \section{}
 
-We use the classes \texttt{Rational} and \texttt{matrix} as in \ref{section: LU decomposition}, as well as the auxiliary functions.
-We can then use the Gauß algorithm:
+Wir nutzen die Klassen \texttt{Rational} und \texttt{Matrix} aus \ref{section: LU decomposition}, sowie die dort definierten Hilfsfunktionen.
+Zudem erweitern wir die Klasse \texttt{Matrix} um zwei weitere Methoden zum Durchführen elementarer Zeilenumformungen.
 
-\lstinputlisting[style=pythoncode, firstline = 160, lastline = 190]{chapter_03/exercise_03_06.py}
+\lstinputlisting[style=pythoncode, firstline = 120, lastline = 129]{chapter_03/exercise_03_06.py}
 
-For the given matrix
+Mithilfe elementarer Zeilenumformungen lässt sich nun der Gauß-Algorithmus zum Invertieren von Matrizen implementieren.
+
+\lstinputlisting[style=pythoncode, firstline = 159, lastline = 188]{chapter_03/exercise_03_06.py}
+
+Für die gegebene Matrix
 \[
   A
   = \begin{pmatrix*}[r]
@@ -14,15 +18,14 @@ For the given matrix
       -6  &  5  & -2
     \end{pmatrix*}
 \]
-this results in the following output:
+erhalten wir das folgende Ergebnis:
 \begin{consoleoutput}
->>> A = matrix([[3,-1,2],[-3,4,-1],[-6,5,-2]])
+>>> A = Matrix([[3,-1,2],[-3,4,-1],[-6,5,-2]])
 >>> B = invert(A)
->>> A.map(Rational)
->>> A*B == identitymatrix(3)
+>>> A = A.mapentries(Rational)
+>>> print(A*B == identitymatrix(3))
 True
->>> B.map(float)
->>> print(B)
+>>> print(B.mapentries(float))
 [-0.3333333333333333 0.8888888888888888 -0.7777777777777778]
 [0.0                 0.6666666666666666 -0.3333333333333333]
 [1.0                 -1.0               1.0                ]
