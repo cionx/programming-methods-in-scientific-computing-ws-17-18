@@ -1,59 +1,27 @@
 \section{}
 
-Wir weitern die gegeben Klasse \texttt{Polynomial} um Methoden zum Ableiten, sowie Bilden einer Stammfunktion.
+Wir weitern die gegeben Klasse \texttt{Polynomial} um eine Methode \texttt{derivative} zum Ableiten, sowie eine Methode \texttt{antiderivative} zum Bilden einer Stammfunktion.
 Dabei wählen wir die \enquote{Integrationskonstante} als $0$.
+Wir definieren außerdem Funktionen zum Ausgeben von Polynomen durch die \texttt{print}-Funktion.
 
 \lstinputlisting[style=pythoncode, firstline=1, lastline=36]{chapter_03/exercise_03_02.py}
 
-% \begin{pythonlisting}
-% class Polynomial:
-%     def __init__(self, coefficients):
-%         self.coeff = coefficients
-%         
-%     def __call__(self, x):
-%         s = 0
-%         for i in range(len(self.coeff)):
-%             s += self.coeff[i]*x**i
-%         return s
-%     
-%     def __add__(self, other):
-%         l = []
-%         if len(self.coeff) > len(other.coeff):
-%             l += self.coeff
-%             for i in range(len(other.coeff)):
-%                 l[i] += other.coeff[i]
-%         else:
-%             l += other.coeff
-%             for i in range(len(self.coeff)):
-%                 l[i] += self.coeff[i]
-%         return Polynomial(l)
-%     
-%     def __eq__(self, other):
-%         return self.coeff == other.coeff
-%     
-%     def derivative(self):
-%         l = []
-%         for i in range(1,len(self.coeff)):
-%             l.append(i * self.coeff[i])
-%         return Polynomial(l)
-%     
-%     def antiderivative(self):
-%         l = [0]
-%         for i in range(len(self.coeff)):
-%             l.append(self.coeff[i]/(i+1))
-%         return Polynomial(l)
-% \end{pythonlisting}
+Für das gegebene Polynom $p(x) = 3 x^2 + 2 x + 1$ testen wir unser Programm mit dem folgenden Code:
 
-Für das gegebene Polynom $p(x) = 3 x^2 + 2 x + 1$ erhalten wir die folgenden Ergebnisse:
+\lstinputlisting[style=pythoncode, linerange={51-53, 58-59, 64-65,70-70}, ]{chapter_03/exercise_03_02.py}
+
+Dabei erhalten wir den folgenden Output:
 
 \begin{consoleoutput}
-    >>> p = Polynomial([1,2,3])
-    >>> p.derivative().coeff
-    [2, 6]
-    >>> p.antiderivative().coeff
-    [0, 1.0, 1.0, 1.0]
-    >>> p.antiderivative().derivative().coeff
-    [1.0, 2.0, 3.0]
+$ python exercise_03_02.py
+The given polynmial p:
+1 x^0 + 2 x^1 + 3 x^2
+The derivative of p:
+2 x^0 + 6 x^1
+The antiderivative of p:
+0 x^0 + 1.0 x^1 + 1.0 x^2 + 1.0 x^3
+Taking antiderivative and then derivative:
+1.0 x^0 + 2.0 x^1 + 3.0 x^2
 \end{consoleoutput}
 
 

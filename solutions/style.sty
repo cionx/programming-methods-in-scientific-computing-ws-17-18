@@ -4,7 +4,7 @@
 \usepackage[ngerman]{babel}
 \usepackage{csquotes}
 
-\renewcommand{\thechapter}{Chapter \arabic{chapter}:}
+\renewcommand{\thechapter}{Chapter \arabic{chapter}}
 \renewcommand{\thesection}{Exercise \arabic{chapter}.\arabic{section}}
 \renewcommand{\thesubsection}{(\arabic{subsection})}
 
@@ -24,9 +24,6 @@
 
 \lstnewenvironment{consoleoutput}{
   \lstset{
-    numbers           = left,
-    stepnumber        = 1,
-    numbersep         = 5pt,
     basicstyle        = \footnotesize\listingsfont,
     showstringspaces  = false,
     frame             = single

@@ -8,7 +8,7 @@
 
 Alle notwendigen Funktionswerte werden zunächst berechnet und in einer Liste gespeichert, um mehrfaches Berechnen des gleichen Funktionswertes zu umgehen.
 
-\lstinputlisting[style=pythoncode, firstline = 3, lastline = 9]{chapter_03/exercise_03_08.py}
+\lstinputlisting[style=pythoncode, firstline = 1, lastline = 7]{chapter_03/trapeze.py}
 
 
 
@@ -16,17 +16,14 @@ Alle notwendigen Funktionswerte werden zunächst berechnet und in einer Liste ge
 
 \subsection{}
 
-Damit erhalten wir für $\int_0^\pi \sin(x) \,\text{d}x$ die folgende Approximation:
+Wir testen unser Programm anhand des gegebenen Integrals $\int_0^\pi \sin(x) \,\text{d}x$ mit dem folgenden Code:
+
+\lstinputlisting[style=pythoncode, firstline = 9, lastline = 17]{chapter_03/exercise_03_08.py}
+
+Wir erhalten den folgenden Output:
 
 \begin{consoleoutput}
->>> from math import sin, pi
->>> n = 1
->>> s = 0
->>> while 2 - s >= 1.E-6:   # sin is concave on [0,pi] -> estimate too small
-...     n += 1              # can skip n = 1 because it results in 0
-...     s = trapeze(sin, 0, pi, n)
-... 
-
->>> print(s)
+$ python exercise_03_08.py
+Estimate for integral of sin from 0 to pi using trapeze:
 1.9999990007015205
 \end{consoleoutput}

@@ -1,15 +1,10 @@
 \section{}
 
-Wir nutzen die Klassen \texttt{Rational} und \texttt{Matrix} aus \ref{section: LU decomposition}, sowie die dort definierten Hilfsfunktionen.
-Zudem erweitern wir die Klasse \texttt{Matrix} um zwei weitere Methoden zum Durchführen elementarer Zeilenumformungen.
+Mithilfe elementarer Zeilenumformungen, die in der Klasse \texttt{Matrix} implementiert sind, lässt sich nun der Gauß-Algorithmus zum Invertieren von Matrizen implementieren.
 
-\lstinputlisting[style=pythoncode, firstline = 120, lastline = 129]{chapter_03/exercise_03_06.py}
+\lstinputlisting[style=pythoncode, firstline = 6, lastline = 27]{chapter_03/exercise_03_06.py}
 
-Mithilfe elementarer Zeilenumformungen lässt sich nun der Gauß-Algorithmus zum Invertieren von Matrizen implementieren.
-
-\lstinputlisting[style=pythoncode, firstline = 159, lastline = 188]{chapter_03/exercise_03_06.py}
-
-Für die gegebene Matrix
+Wir testen unser Programm anhand der gegebenen Matrix
 \[
   A
   = \begin{pmatrix*}[r]
@@ -18,15 +13,27 @@ Für die gegebene Matrix
       -6  &  5  & -2
     \end{pmatrix*}
 \]
-erhalten wir das folgende Ergebnis:
+mit dem folgenden Code:
+
+\lstinputlisting[style=pythoncode, linerange={41-43,50-52,59-60,67-68}]{chapter_03/exercise_03_06.py}
+
+Dabei nutzen wir erneut die Klasse \texttt{Rational}, um ein genaues Rechnen zu erlauben.
+Wir erhalten den folgenden Output:
+
 \begin{consoleoutput}
->>> A = Matrix([[3,-1,2],[-3,4,-1],[-6,5,-2]])
->>> B = invert(A)
->>> A = A.mapentries(Rational)
->>> print(A*B == identitymatrix(3))
-True
->>> print(B.mapentries(float))
+python exercise_03_06.py
+A:
+[3  -1 2 ]
+[-3 4  -1]
+[-6 5  -2]
+A^(-1) with rationals:
+[-1162261467/3486784401 3099363912/3486784401 -2711943423/3486784401]
+[0/43046721             28697814/43046721     -14348907/43046721    ]
+[59049/59049            -59049/59049          59049/59049           ]
+A^(-1) with floats:
 [-0.3333333333333333 0.8888888888888888 -0.7777777777777778]
 [0.0                 0.6666666666666666 -0.3333333333333333]
 [1.0                 -1.0               1.0                ]
+Checking if A*B = I (using rationals):
+True
 \end{consoleoutput}

@@ -2,6 +2,7 @@ from Rational import *
 from Matrix import *
 
 
+
 # we assume that the input matrix is well-behaved
 # i.e. entries allow a reasonable comparison to 0
 def invert(A):
@@ -63,7 +64,7 @@ print(B.mapentries(float))
 #   [0.0                 0.6666666666666666 -0.3333333333333333]
 #   [1.0                 -1.0               1.0                ]
 
-print("Check if A*B = I (using rationals):")
+print("Checking if A*B = I (using rationals):")
 print(A.mapentries(Rational) * B == identitymatrix(3))
 
 #   Check if A*B = I (using rationals):

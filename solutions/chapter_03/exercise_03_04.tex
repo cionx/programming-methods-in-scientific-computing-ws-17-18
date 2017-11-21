@@ -3,23 +3,13 @@
 
 Wir schreiben zunächst eine Klasse \texttt{Rational}, die ein genaues Rechnen mit rationalen Zahlen erlaubt.
 
-\lstinputlisting[style=pythoncode, firstline = 3, lastline = 43]{chapter_03/exercise_03_04.py}
-
-Wir erweitern nun die bisherige \texttt{Matrix}-Klasse um weitere Methoden.
-(Aus Platzgründen kopieren wir den bereits vorhandenen Code nicht noch einmal.)
-
-\lstinputlisting[style=pythoncode, firstline = 110, lastline = 123]{chapter_03/exercise_03_04.py}
-
-Wir nutzen im Folgenden auch einige Hilfsfunktionen, um den Umgang mit Matrizen zu erleichtern.
-(Dies sind keine zusätzlichen Methoden der Klasse \texttt{Matrix}.)
-
-\lstinputlisting[style=pythoncode, firstline = 129, lastline = 146]{chapter_03/exercise_03_04.py}
+\lstinputlisting[style=pythoncode]{chapter_03/Rational.py}
 
 Die LU-Zerlegung von passenden Matrix mit ganzzahligen Einträgen kann nun dem folgenden naiven Algorithmus berechnet werden:
 
-\lstinputlisting[style=pythoncode, firstline = 152, lastline = 167]{chapter_03/exercise_03_04.py}
+\lstinputlisting[style=pythoncode, firstline = 6, lastline = 19]{chapter_03/exercise_03_04.py}
 
-Für die gegebene Matrix
+Wir testen das Program anhand der gegebenen Matrizen
 \[
     A
     = \begin{pmatrix}
@@ -27,38 +17,44 @@ Für die gegebene Matrix
         6 &  6 & 3  \\
         9 & 10 & 6
       \end{pmatrix}
-\]
-erhalten wir das folgende Ergebnis:
-\begin{consoleoutput}
->>> A = Matrix([[3,2,1],[6,6,3],[9,10,6]])
->>> (L,U) = naive_lu(A)
->>> print(L)
-[9/9  0/18  0/1]
-[18/9 18/18 0/1]
-[27/9 36/18 1/1]
->>> print(U)
-[3/1   2/1   1/1    ]
-[0/3   6/3   3/3    ]
-[0/162 0/162 162/162]
->>> print( (L*U).mapentries(float) )
-[3.0 2.0  1.0]
-[6.0 6.0  3.0]
-[9.0 10.0 6.0]
-\end{consoleoutput}
-Für die gegebene Matrix
-\[
+    \quad\text{und}\quad
     B
     = \begin{pmatrix}
         0 & 1 \\
         1 & 0
       \end{pmatrix}
 \]
-(welche keine LU-Zerlegung besitzt) bricht das Programm mit einem Fehler ab.
+mit dem folgenden Code:
+
+\lstinputlisting[style=pythoncode, linerange={21-23,30-32,39-40,53-55,61-62}]{chapter_03/exercise_03_04.py}
+
+Als Output erhalten wir folgendes:
 \begin{consoleoutput}
->>> B = Matrix([[0,1],[1,0]])
->>> (L,U) == naive_lu(B)
+$ python exercise_03_04.py
+A:
+[3 2  1]
+[6 6  3]
+[9 10 6]
+L:
+[9/9  0/18  0]
+[18/9 18/18 0]
+[27/9 36/18 1]
+U:
+[3/1   2/1   1/1    ]
+[0/3   6/3   3/3    ]
+[0/162 0/162 162/162]
+Check if L*U == A:
+True
+B:
+[0 1]
+[1 0]
+Trying to calculate the LU decomposition of B:
 Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "<stdin>", line 12, in naive_lu
+  File "exercise_03_04.py", line 62, in <module>
+    (L,U) == naive_lu(B)
+  File "exercise_03_04.py", line 15, in naive_lu
+    raise ValueError("algorithm does not work for this matrix")
 ValueError: algorithm does not work for this matrix
 \end{consoleoutput}
+
+Da die Matrix $B$ keine LU-Zerlegung besitzt, ist es okay, dass unser Algorithmus diese nicht findet.

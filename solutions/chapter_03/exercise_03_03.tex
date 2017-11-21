@@ -1,17 +1,36 @@
 \section{}
 
-\lstinputlisting[style=pythoncode, firstline=1, lastline=62]{chapter_03/exercise_03_03.py}
+Wir definieren direkt Klasse \texttt{Matrix}, die über alle Methoden verfügt, die wir in diesem und den späteren Aufgabenteilen nutzen werden.
 
-Für die Matrixassoziativität erhalten wir das Folgende:
+\lstinputlisting[style=pythoncode, firstline=3, lastline = 101]{chapter_03/Matrix.py}
+
+Wir definieren zudem Hilfsfunktionen, die wir im Weiteren nutzen werden:
+
+\lstinputlisting[style=pythoncode, firstline=107, lastline = 124]{chapter_03/Matrix.py}
+
+Die Assoziativität der Matrixmultiplikation testen wir mit dem folgenden Code:
+
+\lstinputlisting[style=pythoncode, linerange={3-5,12-14,20-22,30-31}]{chapter_03/exercise_03_03.py}
+
+Wir erhalten wir (durch Ausführen in der Konsole) den folgenden Output:
 
 \begin{consoleoutput}
-    >>> A = Matrix([[0,1],[1,0],[1,1]])
-    >>> B = Matrix([[1,2,3,4],[5,6,7,8]])
-    >>> C = Matrix([[1,0],[0,1],[1,0],[0,1]])
-    >>> print(A * (B * C) == (A * B) * C)
-    True
+$ python exercise_03_03.py
+A:
+[0 1]
+[1 0]
+[1 1]
+B:
+[1 2 3 4]
+[5 6 7 8]
+C:
+[1 0]
+[0 1]
+[1 0]
+[0 1]
+Checking if A(BC) == (AB)C:
+True
 \end{consoleoutput}
-
 
 
 

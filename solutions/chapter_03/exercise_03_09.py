@@ -5,7 +5,7 @@ from trapeze import powertrapeze
 from math import sin, pi
 m = 10
 results = powertrapeze(sin, 0, pi, m)
-print("Calculating trapeze estimate for integral of sin from 0 to pi with 2^m intervals:")
+print("Calculate trapeze estimate for int. of sin from 0 to pi, 2^m intervals:")
 print(" m \testimate \t\terror")
 for i in range(m):
     print("{:2d}\t{}\t{:.20f}".format(i+1, results[i], 2-results[i]))
@@ -29,12 +29,12 @@ for i in range(m):
 
 #   Der Fehler viertelt sich jeweils.
 
-print("Quotients any two subsequent differences of estimates:")
+print("Quotients of any two subsequent differences of estimates:")
 for i in range(m-2):
     q = (results[i] - results[i+1]) / (results[i+1] - results[i+2])
     print(q)
 
-#   Quotients any two subsequent differences of estimates:
+#   Quotients of any two subsequent differences of estimates:
 #   4.164784400584785
 #   4.039182316416593
 #   4.009677144752887
@@ -51,7 +51,7 @@ for i in range(m-2):
 m = 10
 f = (lambda x : 3**(3*x-1))
 results = powertrapeze( f, 0, 2, m)
-print("Calculating trapeze estimate for integral of 3^(3x-1) from 0 to 2 with 2^m intervals:")
+print("Calculate trapeze estimate for int. of 3^(3x-1) from 0 to 2, 2^m intervals:")
 print(" m \testimate")
 for i in range(m):
     print("{:2d}\t{:24.20f}".format(i+1, results[i]))
@@ -69,12 +69,12 @@ for i in range(m):
 #    9       73.62925664736960129630
 #   10       73.62849391106399821183
 
-print("Quotients any two subsequent differences of estimates:")
+print("Quotients of any two subsequent differences of estimates:")
 for i in range(m-2):
     q = (results[i] - results[i+1])/(results[i+1] - results[i+2])
     print(q)
 
-#   Quotients any two subsequent differences of estimates:
+#   Quotients of any two subsequent differences of estimates:
 #   3.471562932248868
 #   3.841500716121706
 #   3.958305665211694

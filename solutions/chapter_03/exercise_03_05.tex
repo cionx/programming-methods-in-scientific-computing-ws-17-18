@@ -1,14 +1,10 @@
 \section{}
 
-Wir erweitern die Klasse \texttt{Matrix} um eine Methode zum Berechnen der Transponierten, um im Folgenden die Ergebnisse überprüfen zu können.
+Wir bestimmen die Cholesky-Zerlegung eintragsweise.
 
-\lstinputlisting[style=pythoncode, firstline = 66, lastline = 71]{chapter_03/exercise_03_05.py}
+\lstinputlisting[style=pythoncode, firstline = 4, lastline = 19]{chapter_03/exercise_03_05.py}
 
-Wir bestimmen die Cholesky-Matrix eintragsweise.
-
-\lstinputlisting[style=pythoncode, firstline = 94, lastline = 110]{chapter_03/exercise_03_05.py}
-
-Für die gegebene Matrix
+Für die gegebenen Matrizen
 \[
     A
   = \begin{pmatrix}
@@ -16,24 +12,7 @@ Für die gegebene Matrix
       2 & 5 &  2 \\
       1 & 2 & 10
     \end{pmatrix}
-\]
-erhalten wir das folgende Ergebnis:
-
-\begin{consoleoutput}
->>> A = Matrix([[1,2,1],[2,5,2],[1,2,10]])
->>> L = cholesky(A)
->>> print(L)
-[1.0 0   0  ]
-[2.0 1.0 0  ]
-[1.0 0.0 3.0]
->>> print(L * L.transpose())
-[1.0 2.0 1.0 ]
-[2.0 5.0 2.0 ]
-[1.0 2.0 10.0]
-\end{consoleoutput}
-
-Für die gegebene Matrix
-\[
+    \quad\text{und}\quad
     B
   = \begin{pmatrix}
       1.01 \cdot 10^{-2}  & 0.705 &  1.42 \cdot 10^{-2} \\
@@ -41,17 +20,40 @@ Für die gegebene Matrix
       1.42 \cdot 10^{-2}  & 1     &  1
     \end{pmatrix}
 \]
-erhalten wir das folgende Ergebnis:
+testen wir unser Programm mit dem folgenden Code:
+
+\lstinputlisting[style=pythoncode, linerange={21-23,30-32,39-40,47-49,56-58,65-66}]{chapter_03/exercise_03_05.py}
+
+Wir erhalten den folgenden Output:
 
 \begin{consoleoutput}
->>> B = Matrix([[1.01E-2, 0.705, 1.42E-2],[0.705,49.5,1],[1.42E-2,1,1]])
->>> L = cholesky(B)
->>> print(L)
+$ python exercise_03_05.py
+A:
+[1 2 1 ]
+[2 5 2 ]
+[1 2 10]
+L:
+[1.0 0   0  ]
+[2.0 1.0 0  ]
+[1.0 0.0 3.0]
+L * L^T:
+[1.0 2.0 1.0 ]
+[2.0 5.0 2.0 ]
+[1.0 2.0 10.0]
+B:
+[0.0101 0.705 0.0142]
+[0.705  49.5  1     ]
+[0.0142 1     1     ]
+L:
 [0.1004987562112089  0                    0                 ]
 [7.015012190980423   0.5381486415443629   0                 ]
 [0.14129528100981847 0.016374437298272527 0.9898320672556135]
->>> print(L * L.transpose())
+L * L^T:
 [0.010100000000000001 0.705 0.014200000000000003]
 [0.705                49.5  1.0                 ]
 [0.014200000000000003 1.0   1.0                 ]
 \end{consoleoutput}
+
+
+
+

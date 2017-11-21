@@ -27,7 +27,7 @@ print(C)
 #   [1 0]
 #   [0 1]
 
-print("Checking if A(BC) == (AB)C")
+print("Checking if A(BC) == (AB)C:")
 print(A * (B * C) == (A * B) * C)
 
 #   Checking if A(BC) == (AB)C:

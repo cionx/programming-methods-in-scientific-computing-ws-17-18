@@ -20,6 +20,37 @@ Für alle $x \leq 0$ gilt $e^\xi \leq e^0 = 1$, und somit
 \]
 Dies führt zu dem folgenden Code:
 
-\lstinputlisting[style=pythoncode, firstline = 1, lastline = 16]{chapter_03/exercise_03_11.py}
+\lstinputlisting[style=pythoncode, firstline = 3, lastline = 18]{chapter_03/exercise_03_11.py}
 
-Für etwa $x \geq 23$ und $x \leq -26$ führt funktioniert diese Approximation allerdings nicht mehr mit der gewünschten Genauigkeit, da die aufzuaddierenden Summanden $x^n/n!$ dann betragsmäßig zu klein werden.
+Wir testen die Genauigkeit des Programms mit dem folgenden Code:
+
+\lstinputlisting[style=pythoncode, firstline = 22, lastline = 28]{chapter_03/exercise_03_11.py}
+
+Wir erhalten den folgenden (gekürzten) Output:
+\begin{consoleoutput}
+Comparison of exp_approx(x) and exp(x) up to 7 digits.
+  x            approximation                    exact   difference (10 digits)
+-30               -0.0000855                0.0000000    0.0000855145
+-29                0.0000551                0.0000000   -0.0000550745
+-28                0.0000050                0.0000000   -0.0000050079
+-27               -0.0000045                0.0000000    0.0000044619
+-26               -0.0000014                0.0000000    0.0000013633
+-25               -0.0000006                0.0000000    0.0000006464
+-24               -0.0000003                0.0000000    0.0000002671
+-23               -0.0000000                0.0000000    0.0000000403
+-22               -0.0000000                0.0000000    0.0000000071
+-21               -0.0000000                0.0000000    0.0000000192
+[...]
+ 21       1318815734.4832141       1318815734.4832146    0.0000004768
+ 22       3584912846.1315928       3584912846.1315918   -0.0000009537
+ 23       9744803446.2489052       9744803446.2489033   -0.0000019073
+ 24      26489122129.8434715      26489122129.8434715    0.0000000000
+ 25      72004899337.3858795      72004899337.3858795    0.0000000000
+ 26     195729609428.8387451     195729609428.8387756    0.0000305176
+ 27     532048240601.7988281     532048240601.7986450   -0.0001831055
+ 28    1446257064291.4738770    1446257064291.4750977    0.0012207031
+ 29    3931334297144.0424805    3931334297144.0419922   -0.0004882812
+ 30   10686474581524.4667969   10686474581524.4628906   -0.0039062500
+\end{consoleoutput}
+
+Für etwa $x \geq 23$ und $x \leq -26$ hat unsere Approximation nicht mehr mit der gewünschten Genauigkeit, da die aufzuaddierenden Summanden $x^n/n!$ dann betragsmäßig zu klein werden.
