@@ -20,13 +20,11 @@ def newton(f, f_prime, x):
 
 
 
-### Exercise 3.12 (2)
-#
-#   >>> f = (lambda x: x**2 - 2)
-#   >>> fprime = (lambda x: 2*x)
-#   >>> print( newton(f, fprime, 1) )
+f = (lambda x: x**2 - 2)
+fprime = (lambda x: 2*x)
+print("Calculating an approximation of sqrt(2):")
+print( newton(f, fprime, 1) )
+#   Calculating an approximation of sqrt(2):
 #   1.4142135623730951
-#
-#   Die ersten 15 Nachkommastellen stimmen mit dem exakten Ergebnis überein.
-#
-###
+
+# The first 15 digits match.
