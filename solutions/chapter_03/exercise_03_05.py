@@ -1,7 +1,8 @@
-from Matrix import *
+from matrices import *
 from math import sqrt
 
-def cholesky(A):    # expects int or float as matrix entries
+# expects int or float as matrix entries
+def cholesky(A): 
     if A.height != A.width:
         raise ValueError("matrix is not square")
     B = copymatrix(A)

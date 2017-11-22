@@ -1,4 +1,4 @@
-from Matrix import *
+from matrices import *
 from math import sqrt
 
 # assumes the matrix to have integer or float values

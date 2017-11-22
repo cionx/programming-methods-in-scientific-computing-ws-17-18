@@ -3,11 +3,11 @@
 
 Wir schreiben zunächst eine Klasse \texttt{Rational}, die ein genaues Rechnen mit rationalen Zahlen erlaubt.
 
-\lstinputlisting[style=pythoncode]{chapter_03/Rational.py}
+\lstinputlisting[style=pythoncode]{chapter_03/rationals.py}
 
 Die LU-Zerlegung von passenden Matrix mit ganzzahligen Einträgen kann nun dem folgenden naiven Algorithmus berechnet werden:
 
-\lstinputlisting[style=pythoncode, firstline = 6, lastline = 19]{chapter_03/exercise_03_04.py}
+\lstinputlisting[style=pythoncode, firstline = 6, lastline = 20]{chapter_03/exercise_03_04.py}
 
 Wir testen das Program anhand der gegebenen Matrizen
 \[
@@ -26,9 +26,10 @@ Wir testen das Program anhand der gegebenen Matrizen
 \]
 mit dem folgenden Code:
 
-\lstinputlisting[style=pythoncode, linerange={21-23,30-32,39-40,53-55,61-62}]{chapter_03/exercise_03_04.py}
+\lstinputlisting[style=pythoncode, linerange={22-24,31-33,40-41,54-56,62-63}]{chapter_03/exercise_03_04.py}
 
-Als Output erhalten wir folgendes:
+Als Output erhalten wir das Folgende:
+
 \begin{consoleoutput}
 $ python exercise_03_04.py
 A:

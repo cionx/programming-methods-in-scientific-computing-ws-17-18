@@ -1,4 +1,4 @@
-from Matrix import Matrix
+from matrices import *
 
 A = Matrix([[0,1],[1,0],[1,1]])
 print("A:")

@@ -38,8 +38,8 @@ Calculate trapeze estimate for int. of sin from 0 to pi, 2^m intervals:
 \subsection{}
 
 Es fällt auf, dass sich der Fehler in jedem Schritt etwa geviertelt wird.
-Bezeichnet $a_n$ die $n$-te Approximation, so gilt $a_0 \leq a_1 \leq \dotsb \leq a_n$; deshalb ist diese Beobachtung äquivalent dazu, dass die Quotienten $(a_i - a_{i+1})/(a_{i+1} - a_{i+2})$ ungefähr $4$ sind.
-
+Bezeichnet $a_n$ die $n$-te Approximation, so gilt $a_0 \leq a_1 \leq \dotsb \leq a_n$, da $\sin$ auf $[0,\pi]$ konkav ist.
+Deshalb ist die Vermutung äquivalent dazu, dass die Quotienten $(a_i - a_{i+1})/(a_{i+1} - a_{i+2})$ ungefähr $4$ sind.
 Dies testen wir mit dem folgenden weiteren Code:
 
 \lstinputlisting[style=pythoncode, firstline = 32, lastline = 35]{chapter_03/exercise_03_09.py}
@@ -58,6 +58,8 @@ Quotients of any two subsequent differences of estimates:
 4.000009414842847
 \end{consoleoutput}
 
+Es fällt auf, dass das Verhältnis sogar gegen $4$ zu gehen scheint.
+
 
 
 
@@ -66,7 +68,7 @@ Quotients of any two subsequent differences of estimates:
 
 Wir berechnen die Approximationen für $\int_0^2 3^{3x-1} \,\text{d}x$ für $m = 1, \dotsc, 10$ mit dem folgenden Code:
 
-\lstinputlisting[style=pythoncode, firstline = 51, lastline = 57]{chapter_03/exercise_03_09.py}
+\lstinputlisting[style=pythoncode, firstline = 53, lastline = 59]{chapter_03/exercise_03_09.py}
 
 Wir erhalten den folgenden Output:
 
@@ -88,9 +90,9 @@ Calculate trapeze estimate for int. of 3^(3x-1) from 0 to 2, 2^m intervals:
 
 Da $f$ konvex ist, sind die Approximationen $b_n$ monoton fallend.
 Die Vermutung lässt sich erneut durch das Betrachten der Quotienten $(b_i - b_{i+1})/(b_{i+1} - b_{i+2})$ überprüfen.
-Wir nutzen den folgenden Code:
+Hierfür nutzen wir (erneut) den folgenden Code:
 
-\lstinputlisting[style=pythoncode, firstline = 72, lastline = 75]{chapter_03/exercise_03_09.py}
+\lstinputlisting[style=pythoncode, firstline = 74, lastline = 77]{chapter_03/exercise_03_09.py}
 
 Wir erhalten den folgenden Output:
 

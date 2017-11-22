@@ -27,7 +27,7 @@ for i in range(m):
 
 ### Exercise 3.9 (2)
 
-#   Der Fehler viertelt sich jeweils.
+#   The error gets divided by 4.
 
 print("Quotients of any two subsequent differences of estimates:")
 for i in range(m-2):
@@ -43,6 +43,8 @@ for i in range(m-2):
 #   4.000150607761501
 #   4.000037649528035
 #   4.000009414842847
+
+#   The quotients goes to 4.
 
 
 

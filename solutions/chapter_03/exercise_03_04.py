@@ -1,9 +1,10 @@
 ### CLASSES
 
-from Rational import *
-from Matrix import *
+from rationals import *
+from matrices import *
 
-def naive_lu(A):  # expects a Rational valued matrix as input
+# expects the matrix entries to be comparable to 0 in a sensible way
+def naive_lu(A): 
     if A.height != A.width:
         raise ValueError("matrix is not square")
     U = copymatrix(A)   # circumvent pass by reference

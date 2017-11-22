@@ -48,6 +48,8 @@ class Polynomial:
             coeff.append(self.coeff[i]/(i+1))
         return Polynomial(coeff)
 
+
+
 p = Polynomial([1,2,3])
 print("The given polynmial p:")
 print(p)

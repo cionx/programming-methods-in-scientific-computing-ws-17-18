@@ -1,10 +1,9 @@
-from Rational import *
-from Matrix import *
+from rationals import *
+from matrices import *
 
 
 
-# we assume that the input matrix is well-behaved
-# i.e. entries allow a reasonable comparison to 0
+# expects the matrix entries to be comparable to 0 in a sensible way
 def invert(A):
     if A.height != A.width:
         raise ValueError("matrix is not square")
