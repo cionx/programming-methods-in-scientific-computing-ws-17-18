@@ -2,12 +2,13 @@
 
 from rationals import *
 from matrices import *
+from copy import deepcopy
 
 # expects the matrix entries to be comparable to 0 in a sensible way
 def naive_lu(A): 
     if A.height != A.width:
         raise ValueError("matrix is not square")
-    U = copymatrix(A)   # circumvent pass by reference
+    U = deepcopy(A)   # circumvent pass by reference
     n = U.height
     L = identitymatrix(n)
     # bring U in upper triangular form, change L such that always LU = A

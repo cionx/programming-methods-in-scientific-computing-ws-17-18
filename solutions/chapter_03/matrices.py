@@ -119,10 +119,3 @@ def identitymatrix(size):       # creates an identiy matrix
     for i in range(size):
         E[i][i] = 1
     return E
-
-def copymatrix(A):              # forcefully copies a matrix
-    B = zeromatrix(A.height, A.width)
-    for i in range(A.height):
-        for j in range(A.width):
-            B[i][j] = A[i][j]
-    return B

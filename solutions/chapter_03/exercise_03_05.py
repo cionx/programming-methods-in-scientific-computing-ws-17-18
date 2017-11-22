@@ -1,11 +1,12 @@
 from matrices import *
+from copy import deepcopy
 from math import sqrt
 
 # expects int or float as matrix entries
 def cholesky(A): 
     if A.height != A.width:
         raise ValueError("matrix is not square")
-    B = copymatrix(A)
+    B = deepcopy(A)
     n = B.height
     L = zeromatrix(n,n)
     for i in range(n):

@@ -1,4 +1,5 @@
 from matrices import *
+from copy import deepcopy
 from math import sqrt
 
 # assumes the matrix to have integer or float values
@@ -7,7 +8,7 @@ def qrdecomp(A):
     if A.height != A.width:
         return ValueError("only square matrices are supported")
     n = A.height
-    Q = copymatrix(A)
+    Q = deepcopy(A)
     R = identitymatrix(n)
     for j in range(n):
         # make the j-th column of Q orthogonal to the next columns

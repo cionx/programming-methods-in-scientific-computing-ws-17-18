@@ -1,13 +1,12 @@
 from rationals import *
 from matrices import *
-
-
+from copy import deepcopy
 
 # expects the matrix entries to be comparable to 0 in a sensible way
 def invert(A):
     if A.height != A.width:
         raise ValueError("matrix is not square")
-    B = copymatrix(A)   # circumvent pass by reference
+    B = deepcopy(A)   # circumvent pass by reference
     n = B.height
     Inv = identitymatrix(n)
     B = B.mapentries(Rational)      # make all
