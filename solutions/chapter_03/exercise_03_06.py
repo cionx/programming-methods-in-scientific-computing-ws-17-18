@@ -62,7 +62,7 @@ print(B.mapentries(float))
 #   [0.0                 0.6666666666666666 -0.3333333333333333]
 #   [1.0                 -1.0               1.0                ]
 
-print("Checking if A*B = I (using rationals):")
+print("Checking if A*B == I (using rationals):")
 print(A.mapentries(Rational) * B == identitymatrix(3))
 
 #   Check if A*B = I (using rationals):
