@@ -8,6 +8,10 @@ eps *= 2
 print("eps: {}".format(eps))
 print("iterations: {}".format(i))
 
+#   Calculate machine epsilon:
+#   eps: 2.220446049250313e-16
+#   iterations: 53
+
 print("With different loop condition:")
 eps = 1.0
 i = 0
@@ -17,3 +21,11 @@ while eps > 0:
 eps *= 2
 print("eps: {}".format(eps))
 print("iterations: {}".format(i))
+
+
+#   With different loop condition:
+#   eps: 0.0
+#   iterations: 1075
+
+#   see the text for an explanation of this results
+

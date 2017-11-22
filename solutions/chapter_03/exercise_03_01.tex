@@ -1,2 +1,49 @@
 \section{}
 
+Wir nutzen den folgenden, leicht abgeänderten Code (für besseren Output):
+
+\lstinputlisting[style=pythoncode, linerange={1-10, 14-23}]{chapter_03/exercise_03_01.py}
+
+Wir erhalten den folgenden Output:
+
+\begin{consoleoutput}
+eps: 2.220446049250313e-16
+iterations: 53
+With different loop condition:
+eps: 0.0
+iterations: 1075
+\end{consoleoutput}
+
+Der IEEE Standard für Floating-Point-Variablen legt fest, dass bei einer Variable vom Typ double die Mantisse $52$ Bit groß ist, und der Exponent $11$ Bit.
+Hierbei ist zu beachten, dass der Exponent in der Darstellung um den Bias von $1023$ verschoben wird, falls es sich um eine normalisierte Zahl handelt (Exponent ungleich $0$) und um $1022$, falls es sich um eine denormalistierte Zahl handelt.
+Ebenfalls wird der größte Exponent ($2047$) als \texttt{NaN} oder \texttt{inf} interpretiert, sodass sich der tatsächliche Exponent der Zahl also im Bereich von $-1022$ bis $+1023$ befindet.
+
+Das bedeutet, dass die kleinste darstellbare Zahl, die größer als $1$ ist, von der Form $(1,00\dots001)_2 = 1 + 2^{-52}$ ist.
+(Hier steht $(\dots)_2$ für die Binärdarstellung.)
+Die kleinste darstellbare Zahl, die größer als $0$ ist, ist dagegen die Zahl
+\[
+    (0,00\dots001)_2 \cdot 2^{-1022}
+  = 2^{-1074}.
+\]
+
+Der erste Algorithmus rechnet der Reihe nach zunächst die Zahlen $2^{-i}$ aus und vergleicht dann $1$ mit $1 + 2^{-i}$.
+Bei $i = 52$ ist dies die kleinste Zahl größer als $1$, wie oben beschrieben.
+Im nächsten Durchlauf wird dann $\mathtt{eps}$ auf $2^{-53}$ gesetzt.
+Hier wird nun $1 + \mathtt{eps}$ auf $1$ gerundet, die Schleife bricht also ab.
+Anschließend wird $\mathtt{eps}$ wieder verdoppelt, sodass sich der folgende Output ergibt:
+\begin{consoleoutput}
+eps: 2.220446049250313e-16
+iterations: 53
+\end{consoleoutput}
+
+Beim zweiten Algorithmus wird dagegen $2^{-i}$ mit $0$ verglichen.
+Dies muss bis zum $1074$-sten Durchlauf der Schleife nicht gerundet werden.
+Zu diesem Zeitpunkt hat $\mathtt{eps}$ den Wert $2^{-1074}$, die kleinste positive darstellbare Zahl.
+Im nächsten Schleifendurchlauf wird $\mathtt{eps}$ halbiert und auf $0$ gerundet.
+Die Schleife bricht also nach $1075$ Durchläufen ab.
+Danach wird $\mathtt{eps}$ wieder verdoppelt, hat also den Wert $0 \cdot 2 = 0$.
+Der Output ist also:
+\begin{consoleoutput}
+eps: 0.0
+iterations: 1075
+\end{consoleoutput}
