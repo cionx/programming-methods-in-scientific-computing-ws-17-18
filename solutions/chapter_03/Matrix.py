@@ -78,12 +78,16 @@ class Matrix():
             self[i][k] =  c * self[j][k] + self[i][k]
             # makes c responsible for implementing the operations
     
-    def addcolumn(self, i, j, c):   # add c times column j from colunm i
+    def addcolumn(self, i, j, c):   # add c times column j to column i
         for k in range(self.height):
             self[k][i] = c * self[k][j] + self[k][i]
     
     def multrow(self, i, c):        # multiply row i with c
         for j in range(self.width):
+            self[i][j] = c * self[i][j]
+            
+    def multcolumn(self, j, c):     # multiply row j with c
+        for i in range(self.height):
             self[i][j] = c * self[i][j]
     
     def swaprows(self, i, j):       # swap rows i and j

@@ -1,1 +1,45 @@
-\addtocounter{section}{1}
+\section{}
+
+Wir Berechnen die QR-Zerlegung einer nicht-singulären Matrix $A$ durch Anwenden des Gram-Schmidt-Verfahrens auf die Spalten von $A$, von links nach rechts:
+
+\lstinputlisting[style=pythoncode, firstline=2, lastline = 25]{chapter_03/exercise_03_07.py}
+
+Für die gegebene Matrix
+\[
+    A
+  = \begin{pmatrix*}[r]
+      12 & -51  &   4 \\
+       6 &  167 & -68 \\
+      -4 &  24  & -41
+    \end{pmatrix*}
+\]
+testen wir das Programm mithilfe des folgenden Codes:
+  
+\lstinputlisting[style=pythoncode, linerange={28-30, 37-39, 47-48, 55-56, 63-64}]{chapter_03/exercise_03_07.py}
+
+Wir erhalten den folgenden Output:
+
+\begin{consoleoutput}
+$ python exercise_03_07.py
+A:
+[12 -51 4  ]
+[6  167 -68]
+[-4 24  -41]
+Q:
+[0.8571428571428571  -0.3942857142857143 -0.33142857142857124]
+[0.42857142857142855 0.9028571428571428  0.03428571428571376 ]
+[-0.2857142857142857 0.17142857142857143 -0.9428571428571428 ]
+Q * Q^T:
+[0.9999999999999998      1.474514954580286e-16 -1.6653345369377348e-16]
+[1.474514954580286e-16   0.9999999999999998    4.996003610813204e-16  ]
+[-1.6653345369377348e-16 4.996003610813204e-16 1.0                    ]
+R:
+[14.0 20.999999999999996 -14.000000000000002]
+[0.0  175.0              -69.99999999999999 ]
+[0.0  0.0                35.0               ]
+Q*R:
+[12.0 -51.0 4.000000000000002]
+[6.0  167.0 -68.0            ]
+[-4.0 24.0  -41.0            ]
+\end{consoleoutput}
+
