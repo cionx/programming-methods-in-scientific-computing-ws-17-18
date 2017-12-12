@@ -1,0 +1,58 @@
+\section{}
+
+
+
+
+
+\subsection{}
+
+Wir testen, für welche Werte von $\alpha$ die Determinante von $A$ verschwindet:
+
+\lstinputlisting[style=pythoncode, firstline = 1, lastline = 8]{chapter_05/exercise_05_24.py}
+
+Als Ergebnis erhalten wir \texttt{\{-3\}}.
+Somit hat das lineare Gleichungssystem $Ax = 0$ nur für $\alpha \neq -3$ nicht-triviale Lösungen.
+
+
+
+
+
+\subsection{}
+
+Die Spalten von $A$ sind genau linear abhängig, wenn $\det A = 0$ gilt.
+Nach dem vorherigen Aufgabenteil gilt dies nur für $\alpha = -3$.
+
+
+
+
+
+\subsection{}
+
+Für $\alpha \neq -3$ ist die Matrix invertierbar, sodass das Gleichungssystem $Ax = b$ dann für jedes $\beta \in \Real$ eine eindeutige Lösung hat.
+Für $\alpha = 3$ hat die Matrix $A$ immer noch Rang $2$, weshalb sich die Werte für $\beta$ in diesem Fall wie folgt bestimmen lässt:
+
+\lstinputlisting[style=pythoncode, firstline = 10, lastline = 13]{chapter_05/exercise_05_24.py}
+
+Wir erhalten den Wert $\beta = 0$.
+
+
+
+
+
+\subsection{}
+
+Für $\alpha = -3$, $\beta = 0$ berechnen wir die Lösungen des Gleichungssystems $Ax = b$ mit \texttt{linsolve}:
+
+\lstinputlisting[style=pythoncode, firstline = 15, lastline = 16]{chapter_05/exercise_05_24.py}
+
+Als Lösung erhalten wir \texttt{\{(z, -2*z + 3, z)\}}.
+
+
+
+
+
+
+
+
+
+

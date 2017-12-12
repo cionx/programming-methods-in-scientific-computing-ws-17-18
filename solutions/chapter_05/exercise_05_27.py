@@ -1,9 +1,9 @@
-from sympy import *
+from sympy import symbols, exp, cosh, lambdify
 
 class TimeOutError(Exception):
     pass
 
-def newton(f, var, x0):
+def newton(f, var, x0): # var = variable name
     fprime  = f.diff(var)
     g = lambdify(var, f)
     gprime = lambdify(var, fprime)
@@ -26,4 +26,8 @@ def newton(f, var, x0):
 x = symbols('x')
 f = exp(x) + 2*x
 g = cosh(x) - 2*x
-newton(f, x, 2)
+x0 = 1
+print("The root of e^x + 2x is {}.".format(newton(f, x, 1)))
+x1 = 0.5
+x2 = 2
+print("The functions cosh(x) and 2x intersect at {} and {}.".format(newton(g, x, x1), newton(g, x, x2)))

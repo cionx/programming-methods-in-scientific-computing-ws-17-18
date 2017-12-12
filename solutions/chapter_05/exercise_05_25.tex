@@ -1,0 +1,31 @@
+\section{}
+
+Wir bestimmen zunächst die Eigenwerte und zugehörigen Eigenvektoren:
+
+\lstinputlisting[style=pythoncode, firstline = 1, lastline = 17]{chapter_05/exercise_05_25.py}
+
+Wir erhalten den folgenden Output:
+
+\begin{consoleoutput}
+The eigenvalues are:
+sqrt(2)*eps*cos(pi/4 - 2/eps) + 1
+sqrt(2)*eps*cos(pi/4 + 2/eps) + 1
+The corresponding eigenvectors are:
+Matrix([[-1], [1]])
+Matrix([[1], [1]])
+\end{consoleoutput}
+
+Inbesondere sind die Eigenwerte $\varphi_1$ und $\varphi_2$ unabhängig von $\epsilon$.
+Wir bestimmen nun die Grenzwerte von $A(\epsilon)$ und $\lambda_i(\epsilon)$ für $\epsilon \to 0$:
+
+\lstinputlisting[style=pythoncode, firstline = 19, lastline = 23]{chapter_05/exercise_05_25.py}
+
+Wir erhalten die folgenden Ergebnisse:
+
+\begin{consoleoutput}
+For eps -> 0 the matrix A becomes:
+Matrix([[1, 0], [0, 1]])
+For eps -> 0 the eigenvalues become:
+1
+1
+\end{consoleoutput}

@@ -1,10 +1,10 @@
-from sympy import *
+from sympy import symbols, Matrix
 
 class TimeOutError(Exception):
     pass
 
 # expect f to be a matrix
-def newton3(f, var, x0):
+def newton(f, var, x0):
     n = len(var)
     if n != len(f):
         raise ValueError("wrong function type")
@@ -17,7 +17,6 @@ def newton3(f, var, x0):
         sublist = list(zip(var, x))
         substitutor = (lambda e: e.subs( sublist ))
         return Df.applyfunc( substitutor )
-    #
     n = 1
     xold = x0
     xnew = x0
@@ -30,8 +29,10 @@ def newton3(f, var, x0):
         n += 1
     raise TimeOutError("the calculation takes too long")
 
+
+
 x, y, z = symbols('x y z')
 
 f = Matrix([9*x**2 + 36*y**2 + 4*z**2 - 36, x**2 - 2*y**2 - 20*z, x**2 - y**2 + z**2])
 x0 = Matrix([1,1,0])
-newton3(f, [x,y,z], x0)
+print( "One root is {}.". format(newton(f, [x,y,z], x0).applyfunc(float)) )

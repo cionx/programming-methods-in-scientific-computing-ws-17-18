@@ -1,0 +1,17 @@
+\section{}
+
+Wir berechnen die Legendre-Polynome, indem wir auf die Polynome $1, x, x^2, \dotsc, x^n$ das Gram-Schmidt-Orthogonalisierungsverfahren anwenden:
+
+\lstinputlisting[style=pythoncode, firstline = 1, lastline = 17]{chapter_05/exercise_05_32.py}
+
+Wir testen die Orthogonalität der ersten $6$ Legendre-Polynome:
+
+\lstinputlisting[style=pythoncode, firstline = 19, lastline = 20]{chapter_05/exercise_05_32.py}
+
+Wir erhalten den folgenden Output:
+
+\begin{consoleoutput}
+Matrix([[2, 0, 0, 0, 0, 0], [0, 2/3, 0, 0, 0, 0], [0, 0, 8/45, 0, 0, 0], [0, 0, 0, 8/175, 0, 0], [0, 0, 0, 0, 128/11025, 0], [0, 0, 0, 0, 0, 128/43659]])
+\end{consoleoutput}
+
+Es handelt sich um eine Diagonalmatrix, was die Orthogonalität zeigt.

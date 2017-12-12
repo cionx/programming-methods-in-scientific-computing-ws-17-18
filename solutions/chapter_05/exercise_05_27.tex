@@ -1,0 +1,18 @@
+\section{}
+
+Wir passen die bisherige \texttt{newton}-Methode dahingehend an, dass sie anstelle einer Funktion $f$ einen \enquote{Funktionsausdruck} der Form \texttt{exp(x) + 2*x} annimmt, und diesen intern in eine entsprechende Funktion umwandelt.
+
+\lstinputlisting[style=pythoncode, firstline = 6, lastline = 22]{chapter_05/exercise_05_27.py}
+
+Anschließend bestimmen wir die Lösungen der Gleichungen $e^x + 2x = 0$ und $\cosh(x) = 2x$, wobei wir die gleichen Startwerte wie in den entsprechenden vorherigen Aufgaben nutzen:
+
+\lstinputlisting[style=pythoncode, firstline = 26, lastline = 33]{chapter_05/exercise_05_27.py}
+
+Wir erhalten die folgenden Ergebnisse:
+
+\begin{consoleoutput}
+The root of e^x + 2x is -0.3517337112491958.
+The functions cosh(x) and 2x intersect at the two points 0.5893877634693505 and 2.1267998926782568.
+\end{consoleoutput}
+
+Dies sind die gleichen Ergebnisse wie zuvor.

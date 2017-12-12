@@ -1,0 +1,13 @@
+\section{}
+
+Wir lösen zunächst die Differentialgleichung ohne Betrachtung der Randwerte:
+
+\lstinputlisting[style=pythoncode, firstline = 1, lastline = 10]{chapter_05/exercise_05_30.py}
+
+Wir erhalten damit die Lösungen \texttt{C1*exp(-x) + C2*exp(x)}.
+Nun bringen wir noch die Randwerte ins Spiel:
+
+\lstinputlisting[style=pythoncode, firstline = 12, lastline = 16]{chapter_05/exercise_05_30.py}
+
+Wir erhalten damit die konkrete Lösung \texttt{-2*E*sinh(x)/(1 + exp(2))}.
+(Das doppelte Anwenden von \texttt{simplify} führt seltsamerweise zu einem besseren Ergebnis als das einmalige Anwenden.)

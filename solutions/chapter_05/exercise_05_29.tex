@@ -1,0 +1,12 @@
+\section{}
+
+Wir bestimmen zunächst die allgemeine Lösung ohne Betrachtung des Anfangswertes:
+
+\lstinputlisting[style=pythoncode, firstline = 1, lastline = 10]{chapter_05/exercise_05_29.py}
+
+Wir erhalten die Lösungen \texttt{C1*exp(-x) + x - 1}.
+Wir bringen nun die Anfangsbedingung ins Spiel:
+
+\lstinputlisting[style=pythoncode, firstline = 12, lastline = 16]{chapter_05/exercise_05_29.py}
+
+Wir erhalten damit die Lösung \texttt{x - 1 + 2*exp(-x)}.
