@@ -1,1 +1,68 @@
-\addtocounter{section}{1}
+\section{}
+
+Das gegebene Randwertproblem
+\[
+        u' = -|u(x)|,
+  \quad u(0) =  0,
+  \quad u(4) = -2
+\]
+für $u \in C^1[0,1]$ hat, entgegen der Aufgabenstellung, keine Lösung:
+
+Die Funktion $u$ wäre monoton fallend, da $u'(x) = -|u(x)| \leq 0$ für alle $x \in [0,4]$.
+Daher ist
+\[
+            I
+  \coloneqq \{
+              x \in [0,4]
+            \mid
+              u(x) < 0
+            \}
+\]
+ein Intervall mit Randpunkt $4$.
+Wegen der Stetigkeit von $u$ ist $I$ halboffen;
+es gibt also $x_0 \in [0,4]$ mit $I = (x_0, 4]$.
+Da $u(0) = 0$ gilt, ist dabei $x_0 > 0$.
+
+Auf dem Intervall $I$ gilt nun $-|u| = u$.
+Also erfüllt $u$ auf $I$ die Differenzialgleichung $u' = u$.
+Somit gibt es eine Konstante $c \in \Real$ mit $u(x) = c e^x$ für alle $x \in I$.
+Es gilt
+\[
+    -2
+  = u(4)
+  = c e^4
+\]
+und somit $c = -2 e^{-4}$.
+Dann gilt aber
+\[
+    u(x_0)
+  = \lim_{x \downarrow x_0} u(x)
+  = \lim_{x \downarrow x_0} -2 e^{x-4}
+  = -2 e^{x_0-4}
+  < 0,
+\]
+im Widerspruch zu $x_0 \notin I$.
+
+Unsere obige Argumentation lässt sich auch spiegelt sich auch in dem Verhalten von \texttt{scipy} wieder:
+Das folgende Programm würde eine Lösung der Differenzgliechung liefern und plotten:
+
+\lstinputlisting[style=pythoncode, firstline = 1, lastline = 21]{chapter_04/exercise_04_22.py}
+
+Wir erhalten den folgenden Graphen:
+
+\begin{center}
+  \includegraphics[width = 0.8\textwidth]{chapter_04/exercise_04_22_figure_1.pdf}
+\end{center}
+
+Die Randbedingung $u(4) = -2$ wird zwar beachtet, die Randbedingung $u(0) = 0$ hingegen nicht.
+Der eingezeichnete Graph ist, entsprechend der obigen Argumentation, der von $-2 e^{x-4}$:
+
+\begin{center}
+  \includegraphics[width = 0.8\textwidth]{chapter_04/exercise_04_22_figure_2.pdf}
+\end{center}
+
+
+
+
+
+
