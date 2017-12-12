@@ -3,8 +3,8 @@
 \usepackage{listings}
 \usepackage[ngerman]{babel}
 \usepackage{csquotes}
+\usepackage{graphicx}
 
-\renewcommand{\thechapter}{Chapter \arabic{chapter}}
 \renewcommand{\thesection}{Exercise \arabic{chapter}.\arabic{section}}
 \renewcommand{\thesubsection}{(\arabic{subsection})}
 
@@ -26,7 +26,8 @@
   \lstset{
     basicstyle        = \footnotesize\listingsfont,
     showstringspaces  = false,
-    frame             = single
+    frame             = single,
+    breaklines        = true
   }
 }{}
 

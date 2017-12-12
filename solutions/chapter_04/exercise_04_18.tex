@@ -1,0 +1,31 @@
+\section{}
+
+Wir nutzen die folgende Funktion, um eine gegebene quadratische Matrix $A$ als $A = L + D + U$ wie in der Aufgabenstellung zu zerlegen:
+
+\lstinputlisting[style=pythoncode, firstline = 4, lastline = 15]{chapter_04/exercise_04_18.py}
+
+Wir bestimmen nun zunächst die exakte Lösung mithilfe des folgenden Codes:
+
+\lstinputlisting[style=pythoncode, firstline = 17, lastline = 27]{chapter_04/exercise_04_18.py}
+
+Anschließend berechnen wir mithilfe des Gauß-Seidel-Algorithmus eine approximative Lösung:
+
+\lstinputlisting[style=pythoncode, firstline = 29, lastline = 38]{chapter_04/exercise_04_18.py}
+
+Wir erhalten den folgenden Output:
+
+\begin{consoleoutput}
+$ python exercise_04_18.py
+A:
+[[ 4  3  0]
+ [ 3  4 -1]
+ [ 0 -1  4]]
+b:
+[ 24  30 -24]
+The solution to Ax = b is:
+[ 3.  4. -5.]
+An approximate solution to Ax = b is:
+[ 2.57885742  4.35095215 -4.91226196]
+The difference is:
+[ 0.42114258 -0.35095215 -0.08773804]
+\end{consoleoutput}

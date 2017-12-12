@@ -1,5 +1,6 @@
 \documentclass[a4paper,10pt]{scrreprt}
 \usepackage{style}
+\setcounter{tocdepth}{4}
 
 \subject{Solutions to Exercises to}
 \title{Programming Methods \\ in Scientific Computing}
@@ -10,8 +11,11 @@
 
 \maketitle
 
-\input{chapter_01.tex}
-\input{chapter_02.tex}
-\input{chapter_03.tex}
+\tableofcontents
+
+\include{chapter_01}
+\include{chapter_02}
+\include{chapter_03}
+\include{chapter_04}
 
 \end{document}
