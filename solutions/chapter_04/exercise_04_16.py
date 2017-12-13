@@ -33,12 +33,14 @@ def J(p):
   A[0,1] = 72*y
   A[0,2] = 8*z
   A[1,0] = 2*x
-  A[1,1] = -2*y
+  A[1,1] = -4*y
   A[1,2] = -20
   A[2,0] = 2*x
   A[2,1] = -2*y
   A[2,2] = 2*z
   return A
 
-x0 = (1,1,1)
-print( "One root is {}.".format(newton(f, J, x0)) )
+x0 = [(1,1,0), (1,-1,0), (-1,1,0), (-1,-1,0)]
+print("initial value\troot")
+for i in range(4):
+    print( "{}\t{}.".format(x0[i], newton(f, J, x0[i])) )

@@ -5,6 +5,9 @@ nach dem Zwischenwertsatz ist $f$ deshalb surjektiv.
 Außerdem ist $f$ differenzierbar mit $f'(x) = 3 x^2 + 3 > 0$ für alle $x \in \Real$, weshalb $f$ streng monoton steigend, und somit injektiv ist.
 Die Abbildung $f$ ist also bijektiv, weshalb die Gleichung $f(x) = a$ für jedes $a \in \Real$ eine eindeutige reelle Lösung besitzt.
 
+(Leider haben wir es auch nach viel herumprobieren nicht geschaft, \texttt{simpy} richtig entscheiden zu lassen, welche der drei Nullstellen jeweils reell sind.
+Daher argumentieren wir diesen Teil rein mathematisch ohne zugehörigen Code.)
+
 Mithilfe von scipy lassen sich die drei verschiedenen Lösungen bestimmen:
 
 \lstinputlisting[style=pythoncode, firstline = 1, lastline = 5]{chapter_05/exercise_05_26.py}
@@ -15,9 +18,12 @@ Wir erhalten die folgenden Lösungen:
 {-(-1/2 - sqrt(3)*I/2)*(-27*a/2 + sqrt(729*a**2 + 2916)/2)**(1/3)/3 + 3/((-1/2 - sqrt(3)*I/2)*(-27*a/2 + sqrt(729*a**2 + 2916)/2)**(1/3)), -(-1/2 + sqrt(3)*I/2)*(-27*a/2 + sqrt(729*a**2 + 2916)/2)**(1/3)/3 + 3/((-1/2 + sqrt(3)*I/2)*(-27*a/2 + sqrt(729*a**2 + 2916)/2)**(1/3)), -(-27*a/2 + sqrt(729*a**2 + 2916)/2)**(1/3)/3 + 3/(-27*a/2 + sqrt(729*a**2 + 2916)/2)**(1/3)}
 \end{consoleoutput}
 
-Wir können nun die reelle Lösung im geforderten Intervall $[-500, 500]$ plotten.
+Wir können nun die reelle Lösung im geforderten Intervall $[-500, 500]$ mit dem folgenden Code plotten:
+
+\lstinputlisting[style=pythoncode, firstline = 7, lastline = 8]{chapter_05/exercise_05_26.py}
+
+Damit erhalten wir die folgenden Graphen:
 
 \begin{center}
-  \includegraphics[width = \textwidth]{chapter_05/exercise_05_26_figure.pdf}
+  \includegraphics[width = 0.6\textwidth]{chapter_05/exercise_05_26_figure.pdf}
 \end{center}
-

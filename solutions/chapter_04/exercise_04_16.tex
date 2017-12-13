@@ -6,11 +6,15 @@ Wir passen zunächst die bisherige \texttt{newton}-Methode an, um mit scipy \tex
 
 Anschließend bestimmen wir die gesuchte Nullstelle:
 
-\lstinputlisting[style=pythoncode, firstline = 22, lastline = 44]{chapter_04/exercise_04_16.py}
+\lstinputlisting[style=pythoncode, firstline = 22, lastline = 46]{chapter_04/exercise_04_16.py}
 
 Wir erhalten den folgenden Output:
 
 \begin{consoleoutput}
-  $ python exercise_04_16.py
-  One root is [ 0.89362823  0.89452701 -0.04008929].
+$ python exercise_04_16.py
+initial value   root
+(1, 1, 0)       [ 0.89362823  0.89452701 -0.04008929].
+(1, -1, 0)      [ 0.89362823 -0.89452701 -0.04008929].
+(-1, 1, 0)      [-0.89362823  0.89452701 -0.04008929].
+(-1, -1, 0)     [-0.89362823 -0.89452701 -0.04008929].
 \end{consoleoutput}

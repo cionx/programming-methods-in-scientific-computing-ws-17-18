@@ -1,4 +1,4 @@
-from sympy import *
+from sympy import symbols, solveset, plot
 
 a, x = symbols('a x', real=True)
 sol = solveset(x**3 + 3*x - a, x)

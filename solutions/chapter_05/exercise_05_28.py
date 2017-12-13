@@ -34,5 +34,7 @@ def newton(f, var, x0):
 x, y, z = symbols('x y z')
 
 f = Matrix([9*x**2 + 36*y**2 + 4*z**2 - 36, x**2 - 2*y**2 - 20*z, x**2 - y**2 + z**2])
-x0 = Matrix([1,1,0])
-print( "One root is {}.". format(newton(f, [x,y,z], x0).applyfunc(float)) )
+x0 = [ Matrix([1,1,0]), Matrix([1,-1,0]), Matrix([-1,1,0]), Matrix([-1,-1,0]) ]
+print("initial value \t\t\troot")
+for i in range(4):
+    print( "{} \t{}". format(x0[i], newton(f, [x,y,z], x0[i]).applyfunc(float)) )

@@ -1,4 +1,4 @@
-from sympy import symbols, Matrix, solveset, linsolve
+from sympy import symbols, Eq, Matrix, solveset, linsolve, det
 
 alpha, beta, x, y, z = symbols('alpha beta x y z')
 

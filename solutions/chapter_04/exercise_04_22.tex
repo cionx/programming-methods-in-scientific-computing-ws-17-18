@@ -8,7 +8,7 @@ Das gegebene Randwertproblem
 \]
 für $u \in C^1[0,1]$ hat, entgegen der Aufgabenstellung, keine Lösung:
 
-Die Funktion $u$ wäre monoton fallend, da $u'(x) = -|u(x)| \leq 0$ für alle $x \in [0,4]$.
+Die Funktion $u$ wäre monoton fallend, da $u'(x) = -|u(x)| \leq 0$ für alle $x \in [0,4]$ gilt.
 Daher ist
 \[
             I
@@ -43,7 +43,7 @@ Dann gilt aber
 \]
 im Widerspruch zu $x_0 \notin I$.
 
-Unsere obige Argumentation lässt sich auch spiegelt sich auch in dem Verhalten von \texttt{scipy} wieder:
+Unsere obige Argumentation spiegelt sich auch in dem Verhalten von \texttt{scipy} wieder:
 Das folgende Programm würde eine Lösung der Differenzgliechung liefern und plotten:
 
 \lstinputlisting[style=pythoncode, firstline = 1, lastline = 21]{chapter_04/exercise_04_22.py}
@@ -55,7 +55,7 @@ Wir erhalten den folgenden Graphen:
 \end{center}
 
 Die Randbedingung $u(4) = -2$ wird zwar beachtet, die Randbedingung $u(0) = 0$ hingegen nicht.
-Der eingezeichnete Graph ist, entsprechend der obigen Argumentation, der von $-2 e^{x-4}$:
+Der eingezeichnete Graph ist, entsprechend der obigen Argumentation, der von $-2 e^{x-4}$, wie aus dem folgenden Bild hervorgeht:
 
 \begin{center}
   \includegraphics[width = 0.8\textwidth]{chapter_04/exercise_04_22_figure_2.pdf}
