@@ -1,1 +1,22 @@
-\addtocounter{section}{1}
+\section{}
+
+Wir nutzen eine selbstgeschriebene \texttt{Matrix}-Klasse mit der folgenden Header-Datei:
+
+\lstinputlisting[style=cppcode, firstline = 1, lastline = 34]{chapter_07/matrix.hpp}
+
+Der konkrete Code der Matrix-Klasse ist wie folgt gegeben:
+
+\lstinputlisting[style=cppcode, firstline = 1, lastline = 139]{chapter_07/matrix.cpp}
+
+Wir nutzen außerdem die \texttt{Polynom}-Klasse aus Aufgabe~37.
+Für die Interpolation selbst nutzen wir nun das folgende Programm:
+
+\lstinputlisting[style=cppcode, firstline = 1, lastline = 42]{chapter_07/exercise_07_34.cpp}
+
+Wir erhalten damit in der Konsole den folgende Output:
+
+\begin{consoleoutput}
+$ g++ exercise_07_34.cpp polynomial.cpp matrix.cpp -o exercise_07_34 
+$ ./exercise_07_34 
+4.83486x^3 - 1.47748x
+\end{consoleoutput}

@@ -12,9 +12,9 @@ class Matrix{
     Matrix();
     Matrix(int i, int j);
     Matrix(int i, int j, double v);
-    double& operator() (int i, int j);
     
     // matrix operations
+    double& operator() (int i, int j);
     Matrix operator-();
     Matrix operator+(Matrix B);
     Matrix operator-(Matrix B);

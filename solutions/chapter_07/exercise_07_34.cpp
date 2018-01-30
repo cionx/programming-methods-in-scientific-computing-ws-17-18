@@ -22,15 +22,15 @@ Polynomial interpol(std::vector<double> points, std::vector<double> values){
 }
 
 int main(){
-  int n = 5;
-  double left = -1.5;
-  double right = 1.5;
-  double h = (right - left)/(n-1);
+  int n = 5;            // number of points
+  double left = -1.5;   // left interval boundary
+  double right = 1.5;   // right interval boundary
+  double h = (right - left)/(n-1);  // length of subintervals
   
   
   std::vector<double> v(n), w(n);
-  double x = left;
-  for(int i = 0; i < n; i++){
+  double x = left;            // current x value
+  for(int i = 0; i < n; i++){ // creates coordinates to be interpolated
     v[i] = x;
     w[i] = tan(x);
     x += h;
