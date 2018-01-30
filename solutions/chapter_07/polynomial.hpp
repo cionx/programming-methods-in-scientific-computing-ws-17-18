@@ -1,8 +1,6 @@
 #include <vector>
 
-
-
-class Polynomial {
+class Polynomial{
   std::vector<double> coeff;
   
 public:

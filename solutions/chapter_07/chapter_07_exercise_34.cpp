@@ -1,41 +1,42 @@
-#include<cmath>
-#include<iostream>
-#include<functional>
-#include "matrix.cpp"
-#include "poly.cpp"
+#include "matrix.hpp"
+#include "polynomial.hpp"
+#include <cmath>
+#include <iostream>
 
-#define PI 3.14159265358979323846f 
+#define PI 3.14159265358979323846
 
 Matrix vandermonte(std::vector<double> v){
-	int n = v.size();
-	Matrix m = Matrix(n,n);
-	for(int i=0;i<n;i++){
-		for(int j=0;j<n;j++){
-			m(i,j) = pow(v[i],j);
-		}
-	}
-	return m;
-}
-
-Matrix inversevandermonte(std::vector<double> v){
-	Matrix m = vandermonte(v);
-	return m.invert();
+  int n = v.size();
+  Matrix V = Matrix(n,n);
+  for(int i=0; i < n; i++)
+    for(int j = 0; j < n; j++)
+      V(i,j) = pow(v[i],j);
+  return V;
 }
 
 Polynomial interpol(std::vector<double> points, std::vector<double> values){
-	return Polynomial(vandermonte(points).gaussSolve(values));
-}
-double fun(double x){
-	return sin(x);
+  Matrix V = vandermonte(points);
+  std::vector<double> coeff = V.gaussSolve(values);
+  Polynomial p = Polynomial(coeff);
+  return p;
 }
 
 int main(){
-	int n = 9;
-	std::vector<double> v(n),w(n);
-	for(int i=0;i<n;i++){
-		v[i] = i;
-		w[i] = fun(i);
-	}
-	interpol(v,w).clean().print();
-	return 0;
+  int n = 5;
+  double left = -1.5;
+  double right = 1.5;
+  double h = (right - left)/(n-1);
+  
+  
+  std::vector<double> v(n), w(n);
+  double x = left;
+  for(int i = 0; i < n; i++){
+    v[i] = x;
+    w[i] = tan(x);
+    x += h;
+  }
+  Polynomial p = interpol(v,w);
+  p.print();
+  
+  return 0;
 }

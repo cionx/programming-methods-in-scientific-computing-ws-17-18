@@ -25,7 +25,7 @@ Matrix::Matrix(int i, int j, double v){
   mat = std::vector<std::vector<double>>(rows, std::vector<double>(cols, v));
 }
 
-double& operator() (int i, int j){  // indices start at 0
+double& Matrix::operator() (int i, int j){  // indices start at 0
   return mat[i][j];
 }
 
@@ -82,25 +82,27 @@ void Matrix::addRowTo(int i,  int j, double c) { // add row i -> i + c*j
 
 std::vector<double> Matrix::gaussSolve(std::vector<double> y){   // solve Ax=y;
   Matrix A = (*this);
-  for ( int j=0; j<cols; j++){
-    int k=j;
-    for ( int i=j; i<rows; i++){
-      if (std::abs(A(i,j))>std::abs(A(k,j))) k=i;
+  std::vector<double> x = y;
+  
+  for (int j = 0; j < cols; j++){
+    int k = j;
+    for (int i = j; i < rows; i++){             // find the biggest value in j-th row
+      if (std::abs(A(i,j)) > std::abs(A(k,j)))
+        k = i;
     }
-    A.permuteRows(j,k);
-    std::swap(y[j],y[k]);
-    y[j]*=1/(A(j,j));
-    A.multiplyRow(j,1/(A(j,j)));
-    for(int i=j+1; i<rows; i++){
-      y[i]-=y[j]*A(i,j);
-      A.addRowTo(j,i,-A(i,j));
+    A.permuteRows(j,k);                         // biggest value w.l.o.g. in the j-th row
+    std::swap(x[j],x[k]);
+    x[j] *= 1/A(j,j);
+    A.multiplyRow(j, 1/A(j,j));
+    for(int i = j+1; i < rows; i++){
+      x[i] -= x[j]*A(i,j);
+      A.addRowTo(i,j,-A(i,j));
     }
   }
-  std::vector<double> x(cols);
-  for (int i=rows-1; i>=0; i--){
-    x[i]=y[i];
-    for (int j=i+1; j<cols; j++){
-      x[i]-=A(i,j)*x[j];
+  for(int j = 0; j < cols; j++){
+    for(int i = 0; i < j; i++){
+      x[i] -= A(i,j) * x[j];
+      A.addRowTo(i, j, -A(i,j));
     }
   }
   return x;
