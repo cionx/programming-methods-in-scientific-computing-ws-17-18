@@ -1,7 +1,5 @@
 #include<vector>
 
-#define EPS 1.E-14
-
 class Quaternion {
   std::vector<double> coord;
   
