@@ -1,1 +1,29 @@
-\addtocounter{section}{1}
+\section{}
+
+Die Klasse \texttt{Polynomial} hat die folgende Header-Datei:
+
+\lstinputlisting[style=cppcode, firstline = 1, lastline = 21]{chapter_07/polynomial.hpp}
+
+Der hinterliegende Code ist wie folgt:
+
+\lstinputlisting[style=cppcode, firstline = 1, lastline = 125]{chapter_07/polynomial.cpp}
+
+Wir testen unsere \texttt{Polynomial}-Klasse mit dem folgenden Code:
+
+\lstinputlisting[style=cppcode, firstline = 1, lastline = 21]{chapter_07/exercise_07_37.cpp}
+
+Wir erhalten in der Konsole den zu erwartenden Output:
+
+\begin{consoleoutput}
+$ g++ exercise_07_37.cpp polynomial.cpp -o exercise_07_37 
+$ ./exercise_07_37 
+P: 3x^2 + 2x + 1
+The value P(2): 17
+-P: -3x^2 - 2x - 1
+Q: 1x^2 + 2x
+P*Q: 3x^4 + 8x^3 + 5x^2 + 2x
+P+Q: 4x^2 + 4x + 1
+Test P = Q: 0
+Test P = P: 1
+\end{consoleoutput}
+
