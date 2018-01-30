@@ -1,4 +1,3 @@
-#include<cmath>
 #include<vector>
 
 #define EPS 1.E-14
