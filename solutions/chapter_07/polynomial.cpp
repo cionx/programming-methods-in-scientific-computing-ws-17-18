@@ -97,6 +97,8 @@ void Polynomial::print(){
     std::string prefix, power;  // prefix and power for the summands
     for(int i = d-1; i >= 0; i--){
       c = p.coeff[i];
+      if(c == 0)
+        continue;
       prefix, power = "";
       
       if (c > 0){
@@ -115,10 +117,8 @@ void Polynomial::print(){
       else if(i == 1)
         power = "x";
       
-      if(c != 0){
-        std::cout << prefix << (c > 0 ? c : -c) << power;
-        first = false;
-      }
+      std::cout << prefix << (c > 0 ? c : -c) << power;
+      first = false;
     }
     std::cout << std::endl;
   }

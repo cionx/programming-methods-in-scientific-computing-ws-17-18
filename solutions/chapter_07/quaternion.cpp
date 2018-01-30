@@ -1,6 +1,7 @@
 #include "quaternion.hpp"
-#include<vector>
-#include<iostream>
+#include <vector>
+#include <iostream>
+
 
 #define EPS 1.E-14
 
@@ -116,21 +117,26 @@ void Quaternion::print(){
   else{
     bool first = true;
     char symbol[] = {'\0', 'i', 'j', 'k'};
+    std::string prefix; // current prefix
+    double c;           // current coordinate
     for(int i = 0; i < 4; i++){
-      if(coord[i] < 0){
-        if (first)
-          std::cout << "-";
-        else
-          std::cout << " - ";
-        std::cout << (-coord[i]) << symbol[i];
-        first = false;
-      }
-      else if (coord[i] > 0) {
+      c = coord[i];
+      if(c == 0)
+        continue;
+      prefix = "";
+      
+      if(c > 0){
         if(!first)
-          std::cout << " + ";
-        std::cout << coord[i] << symbol[i];
-        first = false;
+          prefix = " + ";
       }
+      else{
+        if(first)
+          prefix = "-";
+        else
+          prefix = " - ";
+      }
+      std::cout << prefix << (c > 0 ? c : -c) << symbol[i];
+      first = false;
     }
     std::cout << std::endl;
   }
