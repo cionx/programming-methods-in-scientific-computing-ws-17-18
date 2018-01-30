@@ -1,13 +1,13 @@
-#include<cmath>
-#include<iostream>
+#include <cmath>
+#include <iostream>
 
 #define PI 3.14159265358979323846
 
-double simpson(double f(double), double a, double b, unsigned int steps){
-  double h = (b-a)/steps;
-	double result = f(a);
-  double x = a;
-	for(int i = 1; i < steps; i++) {
+double simpson(double f(double), double a, double b, int n){
+  double h = (b-a)/n;     // length of subintverals
+	double result = f(a);   // current sum
+  double x = a;           // left border of current subinterval
+	for(int i = 1; i < n; i++) {
     result += 4*f(x+h/2);
     result += 2*f(x+h);
     x += h;
@@ -18,7 +18,7 @@ double simpson(double f(double), double a, double b, unsigned int steps){
 }
 
 int main(){
-  std::cout.precision(10);
+  std::cout.precision(10); // set output precision
   std::cout << simpson(sin,0,PI,2000) << std::endl;
 	return 0;
 }
