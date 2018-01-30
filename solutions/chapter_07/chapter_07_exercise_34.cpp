@@ -1,20 +1,41 @@
 #include<cmath>
 #include<iostream>
 #include<functional>
+#include "matrix.cpp"
+#include "poly.cpp"
 
 #define PI 3.14159265358979323846f 
 
-double simpson(std::function<double(double)> f, double a, double b, unsigned int steps){
-	double delta = (b-a)/(2*steps);
-	double result = f(a);
-	for(int i=1;i<steps;i++) result += 2*f(a+2*i*delta);
-	for(int i=0;i<steps;i++) result += 4*f(a+(2*i+1)*delta);
-	result += f(b);
-	result *= delta/3;
-	return result;
+Matrix vandermonte(std::vector<double> v){
+	int n = v.size();
+	Matrix m = Matrix(n,n);
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			m(i,j) = pow(v[i],j);
+		}
+	}
+	return m;
+}
+
+Matrix inversevandermonte(std::vector<double> v){
+	Matrix m = vandermonte(v);
+	return m.invert();
+}
+
+Polynomial interpol(std::vector<double> points, std::vector<double> values){
+	return Polynomial(vandermonte(points).gaussSolve(values));
+}
+double fun(double x){
+	return sin(x);
 }
 
 int main(){
-	std::cout << simpson([](double x){return sin(x);},0,PI,99999);
+	int n = 9;
+	std::vector<double> v(n),w(n);
+	for(int i=0;i<n;i++){
+		v[i] = i;
+		w[i] = fun(i);
+	}
+	interpol(v,w).clean().print();
 	return 0;
 }
