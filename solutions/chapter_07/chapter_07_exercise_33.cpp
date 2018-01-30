@@ -1,20 +1,24 @@
 #include<cmath>
 #include<iostream>
-#include<functional>
 
-#define PI 3.14159265358979323846f 
+#define PI 3.14159265358979323846
 
-double simpson(std::function<double(double)> f, double a, double b, unsigned int steps){
-	double delta = (b-a)/(2*steps);
+double simpson(double f(double), double a, double b, unsigned int steps){
+  double h = (b-a)/steps;
 	double result = f(a);
-	for(int i=1;i<steps;i++) result += 2*f(a+2*i*delta);
-	for(int i=0;i<steps;i++) result += 4*f(a+(2*i+1)*delta);
-	result += f(b);
-	result *= delta/3;
+  double x = a;
+	for(int i = 1; i < steps; i++) {
+    result += 4*f(x+h/2);
+    result += 2*f(x+h);
+    x += h;
+  }
+	result -= f(b);
+  result *= h/6;
 	return result;
 }
 
 int main(){
-	std::cout << simpson([](double x){return sin(x);},0,PI,99999);
+  std::cout.precision(10);
+  std::cout << simpson(sin,0,PI,2000) << std::endl;
 	return 0;
 }
