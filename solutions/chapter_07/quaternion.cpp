@@ -93,31 +93,45 @@ Quaternion Quaternion::operator/(Quaternion q){
 }
 
 Quaternion Quaternion::clean(){
-  double result[4];
-  for(int i = 0; i < 4; i++){
+  double result[] = {0,0,0,0};
+  for(int i = 0; i < 4; i++)
     if(std::abs(coord[i]) > EPS)
       result[i] = coord[i];
-  }
   return Quaternion(result);
 }
 
 bool Quaternion::operator==(Quaternion q){
   Quaternion diff = (*this) - q;
   diff = diff.clean();
-  for(int i = 0; i < 4; i++)
-    if(diff.coord[i] == 0)
+  for(int i = 0; i < 4; i++){
+    if(diff.coord[i] != 0)
       return false;
-    return true;
+  }
+  return true;
 }
 
 void Quaternion::print(){
-  char symbol[] = {'i', 'j', 'k'};
-  std::cout << coord[0];
-  for(int i = 1; i < 4; i++){
-    if(coord[i] < 0)
-      std::cout << " - " << (-coord[i]) << symbol[i-1];
-    else if (coord[i] > 0)
-      std::cout << " + " << coord[i] << symbol[i-1];
+  if(*this == Quaternion())
+    std::cout << "0" << std::endl;
+  else{
+    bool first = true;
+    char symbol[] = {'\0', 'i', 'j', 'k'};
+    for(int i = 0; i < 4; i++){
+      if(coord[i] < 0){
+        if (first)
+          std::cout << "-";
+        else
+          std::cout << " - ";
+        std::cout << (-coord[i]) << symbol[i];
+        first = false;
+      }
+      else if (coord[i] > 0) {
+        if(!first)
+          std::cout << " + ";
+        std::cout << coord[i] << symbol[i];
+        first = false;
+      }
+    }
+    std::cout << std::endl;
   }
-  std::cout << std::endl;
 }
