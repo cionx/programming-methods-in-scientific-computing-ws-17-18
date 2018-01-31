@@ -1,5 +1,29 @@
 \section{}
 
+In der ursprünglichen Version der Aufgabe war fehlerhaft $u' = -|u|$ gefordert.
+Der Vollständigkeit halber betrachten wir beide Formulierungen.
+
+
+
+\subsection*{Version $u'' = -|u|$}
+
+Wir nutzen den folgenden Code:
+
+\lstinputlisting[style=pythoncode, firstline = 1, lastline = 25]{chapter_04/exercise_04_22_new.py}
+
+Wir erhalten damit die folgenden Lösungsgraphen:
+
+\begin{center}
+  \includegraphics[width = 0.8\textwidth]{chapter_04/exercise_04_22_figure_3.pdf}
+\end{center}
+
+
+
+
+
+
+\subsection*{Version $u' = -|u|$}
+
 Das gegebene Randwertproblem
 \[
         u' = -|u(x)|,
@@ -46,7 +70,7 @@ im Widerspruch zu $x_0 \notin I$.
 Unsere obige Argumentation spiegelt sich auch in dem Verhalten von \texttt{scipy} wieder:
 Das folgende Programm würde eine Lösung der Differenzgliechung liefern und plotten:
 
-\lstinputlisting[style=pythoncode, firstline = 1, lastline = 21]{chapter_04/exercise_04_22.py}
+\lstinputlisting[style=pythoncode, firstline = 1, lastline = 21]{chapter_04/exercise_04_22_old.py}
 
 Wir erhalten den folgenden Graphen:
 
@@ -60,6 +84,14 @@ Der eingezeichnete Graph ist, entsprechend der obigen Argumentation, der von $-2
 \begin{center}
   \includegraphics[width = 0.8\textwidth]{chapter_04/exercise_04_22_figure_2.pdf}
 \end{center}
+
+
+
+
+
+
+
+
 
 
 
