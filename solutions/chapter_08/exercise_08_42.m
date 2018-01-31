@@ -39,7 +39,7 @@ function poisson_solver(f,g,m)
 % store values in solution-matrix
   u(2:n+1, 2:n+1) = reshape(u_inner,n,n);
   
-% plotting the function
+% plotting the solution
   mesh(x,y,u, 'LineWidth', 1);
   xlabel('x');
   ylabel('y');
