@@ -1,3 +1,75 @@
-\addtocounter{section}{1}
+\section{}
 
-% TODO: Writting an explanation.
+Es sei $n = 5$ die Anzahl der Punkte und $h = 1/(n-1) = 1/4$ der Abstand der $n$ im Intervall $[0,1]$ gleichmäßig verteilten Punkte $x_i = ih$.
+Aus der Randbedingung $u(0) = 0$ erhalten wir für die Werte $u_i = u(x_i)$, dass $u_0 = u(x_0) = u(0) = 0$.
+Mit den Annäherungen
+\begin{gather*}
+          u''(x)
+  \approx \frac{1}{h^2}( u(x+h) + u(x-h) - 2u(x))
+\shortintertext{und}
+          u'(x)
+  \approx \frac{1}{h}( u(x+h) - u(x) )
+\end{gather*}
+erhalten wir aus der Differenzialgeichung $u''(x) - 5 u'(x) + 4u(x) = x^2$ für alle $i \geq 1$ die linearen Gleichungen
+\begin{equation}
+  \label{equation: discrete ode}
+    \frac{1}{h^2}( u_{i+1} + u_{i-1} - 2 u_i )
+  - \frac{5}{h}( u_{i+1} - u_i )
+  + 4 u_i
+  = x_i^2 \,.
+\end{equation}
+Um die Bedingunge $u'(1) = 0$ zu simulieren, fügen wir noch einen zusätzlichen Punkt $x_n = 1+h$ hinzu, und für den entsprechenden Funktionswert $u_n = u(1+h)$ die Gleichung
+\begin{equation}
+  \label{equation: approx right boundary condition}
+  \frac{1}{h}( u_n - u_{n-1} ) = u'(1) = 0 \,.
+\end{equation}
+Wir erhalten somit ein lineares Gleichungssystem in den $n$ Unbekannten $u_1, \dotsc, u_n$, sowie $n-1$ Gleichungen der Form \eqref{equation: discrete ode} (für $i = 1, \dots, n-1$) und der zusätzlichen Gleichung \eqref{equation: approx right boundary condition}.
+Um dieses zu Lösen, nutzen wir erneut unsere \texttt{Matrix}-Klasse.
+
+Wir erhalten somit das folgende Programm:
+
+\lstinputlisting[style=cppcode, firstline = 1, lastline = 63]{chapter_07/exercise_07_36.cpp}
+
+Wir erhalten den folgenden Output:
+
+\begin{consoleoutput}
+x                  approx          exact
+0.000000        | 0.000000      | -0.000000
+0.250000        | -0.000451     | -0.010135
+0.500000        | -0.014724     | -0.033187
+0.750000        | -0.034856     | -0.068764
+1.000000        | -0.129808     | -0.094135
+\end{consoleoutput}
+Unsere Annäherung ist nicht sonderlich exakt.
+Dies lässt sich etwa damit erklären, dass wir in unserem Vorgehen die Bedingung $u'(1) = 0$ dadurch implementieren, dass $u_n = u_{n-1}$, also $u(1) = u(1+h) = u(5/4)$.
+Die exakte Lösung verändert sich im Bereich $[1,5/4]$ allerdings verhältnismäßig stark, weshalb diese Umsetzung der Randbedingung $u'(1) = 0$ nicht sonderlich gut funktioniert.
+
+Dieses Problem lässt nach, wenn mehr Punkte verwendet werden.
+So enthält man etwa für $n = 24$ die folgenden Ergebnisse:
+\begin{consoleoutput}
+x                  approx          exact
+0.000000        | 0.000000      | -0.000000
+0.043478        | -0.000891     | -0.001071
+0.086957        | -0.002016     | -0.002388
+0.130435        | -0.003416     | -0.003989
+0.173913        | -0.005131     | -0.005909
+0.217391        | -0.007200     | -0.008181
+0.260870        | -0.009659     | -0.010837
+0.304348        | -0.012544     | -0.013902
+0.347826        | -0.015886     | -0.017399
+0.391304        | -0.019710     | -0.021343
+0.434783        | -0.024036     | -0.025743
+0.478261        | -0.028874     | -0.030595
+0.521739        | -0.034226     | -0.035886
+0.565217        | -0.040075     | -0.041586
+0.608696        | -0.046391     | -0.047645
+0.652174        | -0.053117     | -0.053993
+0.695652        | -0.060172     | -0.060531
+0.739130        | -0.067436     | -0.067126
+0.782609        | -0.074747     | -0.073605
+0.826087        | -0.081886     | -0.079745
+0.869565        | -0.088570     | -0.085265
+0.913043        | -0.094428     | -0.089813
+0.956522        | -0.098987     | -0.092949
+1.000000        | -0.101646     | -0.094135
+\end{consoleoutput}

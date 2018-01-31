@@ -9,7 +9,7 @@ double f_exact(double x){
 }
 
 int main(){
-  int n = 24;
+  int n = 5;
   
   double left = 0;    // left interval value
   double right = 1;   // right interval value
@@ -23,6 +23,7 @@ int main(){
   Matrix A = Matrix(n,n);           // LGS for the values u[1] to u[n]
   std::vector<double> b(n,0);
   
+  // set matrix entries
   A(0,0) = -2/(h*h) + 5/h + 4;
   A(0,1) = 1/(h*h) - 5/h;
   for(int i = 1; i < n; i++){
@@ -33,6 +34,7 @@ int main(){
   A(n-1, n-2) = -1;
   A(n-1, n-1) =  1;
   
+  // set result vector
   double x = 0;
   for(int i = 0; i < n-1; i++){
     x += h;
@@ -42,7 +44,6 @@ int main(){
   b[n-1] = h*rb;
   
   std::vector<double> u_right = A.gaussSolve(b);
-  
   for(int i = 0; i < n; i++)
     u[i+1] = u_right[i];
   
@@ -50,7 +51,7 @@ int main(){
   std::cout << std::setprecision(6);
 //  list of results
   x = 0; //  current point, variable already initialized before
-  std::cout << "x\t\t  approx\t\t  exact" << std::endl;
+  std::cout << "x\t\t   approx\t   exact" << std::endl;
   for(int i = 0; i < n; i++){
     std::cout << x
               << "\t| "
