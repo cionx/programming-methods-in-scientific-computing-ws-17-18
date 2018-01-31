@@ -13,7 +13,7 @@ int main(){
   
   double left = 0;    // left interval value
   double right = 1;   // right interval value
-  double lb = 0;      // left boundary conditition for u
+  double lb = 0;      // left boundary condition for u
   double rb = 0;      // right boundary condition for u'
   
   double h = (right - left)/(n-1);  // distance between points
