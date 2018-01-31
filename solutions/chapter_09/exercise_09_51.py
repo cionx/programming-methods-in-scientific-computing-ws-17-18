@@ -1,6 +1,5 @@
-from scipy import *
+from scipy import linspace
 from scipy.interpolate import InterpolatedUnivariateSpline
-#import scipy.interpolate.InterpolatedUnivariateSpline as Spline
 import matplotlib.pyplot as plt
 
 f = (lambda z: 1/(1 + 25*z**2))
@@ -17,5 +16,5 @@ def rungespline(n):
     plt.plot(lin, spline(lin))
     plt.show()
 
-for n in range(3,10):
-    rungespline(n)
+for n in [5,7,11]:
+    rungespline(n+1)

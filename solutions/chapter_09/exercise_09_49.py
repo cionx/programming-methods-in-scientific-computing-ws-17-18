@@ -9,10 +9,10 @@ def inner(f,g):
 # copied from chapter 5, exercise 32
 # calculates the first n legendre polynomials of even degree
 def legendre(n):
-    p = [x**(2*i) for i in range(n)]
-    normsq = []
+    p = [x**(2*i) for i in range(n)] # to be orthogonalized
+    normsq = [] # list of squares of norms
     for i in range(n):
-        s = 0
+        s = 0   # projection onto previous polynomials
         for j in range(i):
             s += inner(p[i], p[j])/normsq[j] * p[j]
         p[i] -= s
@@ -22,22 +22,22 @@ def legendre(n):
 # returns the first n approximations
 def approx(n):
     L = legendre(n)
-    aps = []
-    s = 0
-    for p in L:
-        s += inner(f,p)/inner(p,p) * p
-        aps.append(s)
-    return aps
+    approxlist = []
+    p = 0   #current approximation
+    for q in L:
+        p += inner(f,q)/inner(q,q) * q
+        approxlist.append(p)
+    return approxlist
 
 
 
-n = 10 # number of approximations
+n = 20 # number of approximations
 approxlist = approx(n)
 
 # (a)
-for p in approxlist:
-    plot(p, (x, -1, 1))
+for i in [5, 11, 17]:
+    plot(approxlist[i], (x, -1, 1))
 
 # (b)
-for p in approxlist:
-    plot(p - f, (x, -1, 1))
+for p in [5, 11, 17]:
+    plot(approxlist[i] - f, (x, -1, 1))
