@@ -1,0 +1,37 @@
+\section{}
+
+Unsere \texttt{Quaternion}-Klasse hat die folgende Header-Datei:
+
+\lstinputlisting[style=cppcode, firstline = 1, lastline = 28]{chapter_07/quaternion.hpp}
+
+Der konkrete Code ist wie folgt:
+
+\lstinputlisting[style=cppcode, firstline = 1, lastline = 143]{chapter_07/quaternion.cpp}
+
+Wir testen unsere \texttt{Quaternion}-Klasse mit dem folgende Programm:
+
+\lstinputlisting[style=cppcode, firstline = 1, lastline = 40]{chapter_07/exercise_07_38.cpp}
+
+In der Konsole erhalten wir den zu erwartenden Output:
+
+\begin{consoleoutput}
+$ g++ exercise_07_38.cpp quaternion.cpp -o exercise_07_38
+$ ./exercise_07_38                                       
+Q1: 1 + 2i + 3j + 4k
+Negative of Q1: -1 - 2i - 3j - 4k
+Conjugate of Q1: 1 - 2i - 3j - 4k
+Absolute value of Q1: 5.47723
+Q2: 2 + 3i + 4j + 5k
+Test for Q1 = Q2: 0
+Test for Q1 = Q1: 1
+Q1 * Q2: -36 + 6i + 12j + 12k
+Q2 * Q1: -36 + 8i + 8j + 14k
+Q1 / Q2: 0.740741 + 0.037037i + 0.0740741k
+(Q1 / Q2) * Q2: 1 + 2i + 3j + 4k
+Hamilton equations:
+i^2 = -1
+j^2 = -1
+k^2 = -1
+ijk = -1
+\end{consoleoutput}
+

@@ -1,0 +1,61 @@
+\section{}
+
+Wir nutzen erneut die bereits \texttt{Matrix}-Klasse.
+
+Es sei $n = 5$ die Anzahl der Punkte und $h = 1/(n-1) = 1/4$ die Länge der Teilintervalle erhalten.
+Aus den gebenen Randwerten erhalten wir für die Punkte $u_i = (ih)$, dass $u_0 = u(0) = 0$ und $u_n = u(1) = u(0)$.
+Aus der Approximation
+\[
+          u''(x)
+  \approx \frac{1}{h^2}( u(x+h) + u(x-h) - 2u(x))
+\]
+und der Bedingung $u'' = 4u$ die Gleichungen
+\[
+    4 u_i
+  = \frac{1}{h^2}( u_{i+1} + u_{i-1} - 2u )
+  \qquad
+  \text{für alle $i = 1, \dotsc, n-1$} \,,
+\]
+also das lineare Gleichungssystem
+\[
+  \begin{pmatrix}
+     C  & -1  &         &     &     \\
+    -1  &  C  & \ddots  &     &     \\
+        & -1  & \ddots  & -1  &     \\
+        &     & \ddots  &  C  & -1  \\
+        &     &         & -1  &  C
+  \end{pmatrix}
+  \begin{pmatrix}
+    u_1     \\
+    u_2     \\
+    \vdots  \\
+    u_{n-2} \\
+    u_{n-1}
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    u_0     \\
+    0       \\
+    \vdots  \\
+    0       \\s
+    u_n
+  \end{pmatrix} \,,
+\]
+wobei $C = 2 + 4h^2$.
+
+\lstinputlisting[style=cppcode, firstline = 1, lastline = 57]{chapter_07/exercise_07_35.cpp}
+
+Wir erhalten in der Konsole den folgende Output:
+
+\begin{consoleoutput}
+$ g++ exercise_07_35.cpp matrix.cpp -o exercise_07_35
+$ ./exercise_07_35                                  
+x                 approximation   exact
+0.00000000      | 0.00000000    | 0.00000000
+0.25000000      | 1.05269418    | 1.04219061
+0.50000000      | 2.36856190    | 2.35040239
+0.75000000      | 4.27657010    | 4.25855891
+1.00000000      | 7.25372082    | 7.25372082
+\end{consoleoutput}
+
+

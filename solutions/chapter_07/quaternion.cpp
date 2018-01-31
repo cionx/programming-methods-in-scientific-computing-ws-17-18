@@ -1,5 +1,6 @@
 #include "quaternion.hpp"
 #include <vector>
+#include <cmath>
 #include <iostream>
 
 
