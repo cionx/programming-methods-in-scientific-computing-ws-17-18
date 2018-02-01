@@ -16,7 +16,7 @@ Matrix vandermonte(std::vector<double> v){
 
 Polynomial interpol(std::vector<double> points, std::vector<double> values){
   Matrix V = vandermonte(points);
-  std::vector<double> coeff = V.gaussSolve(values);
+  std::vector<double> coeff = gaussSolve(V,values);
   Polynomial p = Polynomial(coeff);
   return p;
 }

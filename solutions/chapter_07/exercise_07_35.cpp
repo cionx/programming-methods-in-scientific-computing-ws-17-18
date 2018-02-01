@@ -34,7 +34,7 @@ int main(){
   b[0] = u[0];
   b[m-1] = u[n-1];
   
-  std::vector<double> u_inner = A.gaussSolve(b);
+  std::vector<double> u_inner = gaussSolve(A,b);
   for(int i = 0; i < m; i++){
     u[i+1] = u_inner[i];
   }

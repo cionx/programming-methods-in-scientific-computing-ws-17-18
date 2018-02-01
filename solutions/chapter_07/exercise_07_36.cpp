@@ -43,13 +43,13 @@ int main(){
   b[0] += -u[0]/(h*h);
   b[n-1] = h*rb;
   
-  std::vector<double> u_right = A.gaussSolve(b);
+  std::vector<double> u_right = gaussSolve(A,b);
   for(int i = 0; i < n; i++)
     u[i+1] = u_right[i];
-  
+
+  //  printing results  
   std::cout << std::fixed;
   std::cout << std::setprecision(6);
-//  list of results
   x = 0; //  current point, variable already initialized before
   std::cout << "x\t\t   approx\t   exact" << std::endl;
   for(int i = 0; i < n; i++){

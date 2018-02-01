@@ -13,33 +13,49 @@ Matrix::Matrix(){
   cols = 0;
 }
 
-Matrix::Matrix(int i, int j){
-  rows = i;
-  cols = j;
+Matrix::Matrix(int m, int n){
+  rows = m;
+  cols = n;
   mat = std::vector<std::vector<double>>(rows, std::vector<double>(cols,0));
 }
 
-Matrix::Matrix(int i, int j, double v){
-  rows = i;
-  cols = j;
+Matrix::Matrix(int m, int n, double v){
+  rows = m;
+  cols = n;
   mat = std::vector<std::vector<double>>(rows, std::vector<double>(cols, v));
+}
+
+// informations about the matrix
+
+int Matrix::height(){
+  return cols;
+}
+
+int Matrix::width(){
+  return rows;
 }
 
 double& Matrix::operator() (int i, int j){  // indices start at 0
   return mat[i][j];
 }
 
+
+
 // matrix operations
 
 Matrix Matrix::operator-(){
-  Matrix C(rows,cols);     
-  for (int i = 0; i < rows; i++)
-    for (int j = 0; j < cols; j++)
+  Matrix C((*this).height(), (*this).width());
+  for (int i = 0; i < C.height(); i++)
+    for (int j = 0; j < C.width(); j++)
       C(i,j) = -(*this)(i,j);
     return C;
 }
 
 Matrix Matrix::operator+(Matrix B){
+  if( rows != B.rows || cols != B.cols ){
+    std::cerr << "Error: Trying to add matrices with different dimensions." << std::endl;
+    exit(1);
+  }
   Matrix C(rows,cols);     
   for (int i = 0; i < rows; i++)
     for (int j = 0; j < cols; j++)
@@ -48,6 +64,10 @@ Matrix Matrix::operator+(Matrix B){
 }
 
 Matrix Matrix::operator-(Matrix B){
+  if( rows != B.rows || cols != B.cols ) {
+    std::cerr << "Error: Trying to add matrices with different dimensions." << std::endl;
+    exit(1);
+  }
   Matrix C(rows,cols);     
   for (int i = 0; i < rows; i++)
     for (int j = 0; j < cols; j++)
@@ -56,11 +76,15 @@ Matrix Matrix::operator-(Matrix B){
 }
 
 Matrix Matrix::operator*(Matrix B){
+  if(cols != B.rows){
+    std::cerr << "Error: Trying to multipliy matrices with wrong dimensions." << std::endl;
+    exit(1);
+  }
   Matrix C(rows, B.cols);
   for (int i = 0; i < rows; i++)
     for (int k = 0; k < cols; k++)
       for (int j = 0; j < B.cols; j++)
-        C(i,j) += (*this)(i,k)*B(k,j);
+        C(i,j) += (*this)(i,k) * B(k,j);
   return C;
 }
 
@@ -75,37 +99,9 @@ void Matrix::multiplyRow(int i, double c){ // multipliy row i -> c*i
     mat[i][j] *= c;
 }
 
-void Matrix::addRowTo(int i,  int j, double c) { // add row i -> i + c*j
+void Matrix::addRowToFrom(int i,  int j, double c) { // add row i -> i + c*j
   for (int k = 0; k < cols; k++)
     mat[i][k] += c * mat[j][k];
-}
-
-std::vector<double> Matrix::gaussSolve(std::vector<double> y){   // solve Ax=y;
-  Matrix A = (*this);
-  std::vector<double> x = y;
-  
-  for (int j = 0; j < cols; j++){
-    int k = j;
-    for (int i = j; i < rows; i++){             // find the biggest value in j-th row
-      if (std::abs(A(i,j)) > std::abs(A(k,j)))
-        k = i;
-    }
-    A.permuteRows(j,k);                         // biggest value w.l.o.g. in the j-th row
-    std::swap(x[j],x[k]);
-    x[j] *= 1/A(j,j);
-    A.multiplyRow(j, 1/A(j,j));
-    for(int i = j+1; i < rows; i++){
-      x[i] -= x[j]*A(i,j);
-      A.addRowTo(i,j,-A(i,j));
-    }
-  }
-  for(int j = 0; j < cols; j++){
-    for(int i = 0; i < j; i++){
-      x[i] -= A(i,j) * x[j];
-      A.addRowTo(i, j, -A(i,j));
-    }
-  }
-  return x;
 }
 
 //  comparing and printing
@@ -126,7 +122,7 @@ bool Matrix::operator==(Matrix B){
     for (int j = 0; j < cols; j++)
       if (D(i,j) != 0)
         return false;
-      return true;
+  return true;
 }
 
 void Matrix::print(){
@@ -136,4 +132,39 @@ void Matrix::print(){
       std::cout << B(i,j) << "\t";
     std::cout << std::endl; 
   }
+}
+
+// solving Ax = y by Gauss-Jordan
+
+std::vector<double> gaussSolve(Matrix A, std::vector<double> y){
+  int rows = A.height();
+  int cols = A.width();
+  if(y.size() != rows){
+    std::cerr << "Trying to solve LGS with wrong dimensions." << std::endl;
+    exit(1);
+  }
+  std::vector<double> x = y;
+  
+  for (int j = 0; j < cols; j++){
+    int k = j;
+    for (int i = j; i < rows; i++){             // find the biggest value in j-th row
+      if (std::abs(A(i,j)) > std::abs(A(k,j)))
+        k = i;
+    }
+    A.permuteRows(j,k);                         // biggest value w.l.o.g. in the j-th row
+    std::swap(x[j],x[k]);
+    x[j] *= 1/A(j,j);
+    A.multiplyRow(j, 1/A(j,j));
+    for(int i = j+1; i < rows; i++){
+      x[i] -= x[j]*A(i,j);
+      A.addRowToFrom(i,j,-A(i,j));
+    }
+  }
+  for(int j = 0; j < cols; j++){
+    for(int i = 0; i < j; i++){
+      x[i] -= A(i,j) * x[j];
+      A.addRowToFrom(i, j, -A(i,j));
+    }
+  }
+  return x;
 }
