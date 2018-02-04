@@ -1,12 +1,15 @@
-# See text for the choice of exit condition.
+# An explaination of the loop condition can be found in the notes.
+
+from math import ceil
 
 def exp_approx(x):
     y = 1       # current approx
     d = 6       # number of digits
-    n = 1
+    n = 1       # current iteration
     fac = 1     # n!
+    m = ceil(x)
     if x >= 0:
-        while fac < (3**x) * (x**(n+1)) * 10**d:
+        while fac < (3**m) * (x**(n+1)) * 10**d:
             y += x**n / fac
             n += 1  
             fac *= n
@@ -17,18 +20,22 @@ def exp_approx(x):
             fac *= n
     return y
 
+
+
 # We compare our approximation to the standard implementation from the math package:
 
 from math import exp
+
 print("Comparison of exp_approx(x) and exp(x) up to 7 digits.")
 print("{:>3s}   {:>22s}   {:>22s}   {:13s}".format("x","approximation","exact","difference (10 digits)"))
 for x in range(-30,31):
     approx = exp_approx(x)
-    exact = exp(x)          # not really exact, but better then the above
+    exact = exp(x)
     print("{:3d}   {:22.7f}   {:22.7f}   {:13.10f}".format(x, approx, exact, exact-approx))
 
+### OUTPUT:
 #   Comparison of exp_approx(x) and exp(x) up to 7 digits.
-#     x            approximation                    exact   difference (10 digits)l
+#     x            approximation                    exact   difference (10 digits)
 #   -30               -0.0000855                0.0000000    0.0000855145
 #   -29                0.0000551                0.0000000   -0.0000550745
 #   -28                0.0000050                0.0000000   -0.0000050079
@@ -90,6 +97,3 @@ for x in range(-30,31):
 #    28    1446257064291.4738770    1446257064291.4750977    0.0012207031
 #    29    3931334297144.0424805    3931334297144.0419922   -0.0004882812
 #    30   10686474581524.4667969   10686474581524.4628906   -0.0039062500
-
-# For x >= 23 and x <= 26 our approximation becomes worse than planed.
-# The problem seems to be that the summands x^n/n! become to small.

@@ -1,121 +1,169 @@
 ### MAIN CLASS
 
 class Matrix():
-    def __init__(self, entries):
-        m = len(entries)
-        if m == 0:
-            raise ValueError("height must be positive")
-        n = len(entries[0])
-        if n == 0:
-            raise ValueError("width must be positive")
-        for i in range(1, m):
-            if len(entries[i]) != n:
-                raise ValueError("rows must have the same width")
-        self.height = m
-        self.width = n
+    # constructor takes list of rows
+    def __init__(self, m, n, entries):
+        self.rows = m
+        self.cols = n
         self.entries = entries
-    
-    def __getitem__(self, i):       # allows to get the rows via A[i]
+
+    # gets the rows via A[i]
+    def __getitem__(self, i):       
         return self.entries[i]
     
-    def __setitem__(self, i, k):    # allows to set rows via A[i]
-        self.entries[i] = k
+    # sets the rows via A[i]
+    def __setitem__(self, i, r):
+        self.entries[i] = r
+
+    def height(self):
+        return self.rows;
     
-    def __str__(self):              # allows print(A) for a Matrix A
-        rows = ["["]*self.height
-        for j in range(self.width): # construct output columnwise, align left
+    def width(self):
+        return self.cols;
+
+    # converts matrix to a string for printing
+    # constructs the matrix columnwise, left aligned
+    def __str__(self):
+        rowstrings = [ "" ]*self.rows
+        for j in range(self.cols): # going trough columns
             numbers = []            # numbers to appear in column j
             maxlen = 0              # maximal length of a number in column j
-            for i in range(self.height):
+            for i in range(self.rows):
                 s = str(self[i][j])
                 numbers.append(s)
-                if len(s) > maxlen:
-                    maxlen = len(s)
-            for i in range(self.height):
+                maxlen = max(len(s), maxlen)
+            for i in range(self.rows):
                 # pad the entries if they are too short
-                rows[i] += numbers[i] + " "*(maxlen-len(numbers[i])) + " "
+                numbers[i] += " "*(maxlen-len(numbers[i]))
+                # build up column in string
+                rowstrings[i] += numbers[i] + " "
+        # put the row strings together
         s = ""
-        for r in rows:
-            s += r[:-1] + "]\n" # remove white space at the end of ech line
-        s = s[:-1]              # remove empty line at the end
+        for r in rowstrings:
+            s += "[" + r[:-1] + "]\n" # remove white space at the end of lines
+        s = s[:-1]                    # remove at newline at the end
         return s
     
     def __repr__(self):
         return str(self)
     
-    def __mul__(self, other):
-        if self.width != other.height:
-            raise TypeError('matrix dimensions do not match')
-        newentries = []
-        for i in range(self.height):
+    # addition of matrices of the same dimensions
+    def __add__(self, other):
+        if self.rows != other.rows:
+            raise ValueError('cannot add matrices of different height')
+        if self.cols != other.cols:
+            raise ValueError('cannot add matrices of different width')
+        result = []
+        for i in range(self.rows):
             row = []
-            for j in range(other.width):
-                s = self[i][0] * other[0][j]    # makes s have the right type
-                for k in range(1, self.width):
+            for j in range(other.cols):
+                row.append(self[i][j] + other[i][j])
+            result.append(row)
+        return Matrix(self.rows, self.cols, result)
+    
+    # multiplication to matrices of compatible dimensions
+    def __mul__(self, other):
+        if self.cols != other.rows:
+            raise ValueError('cannot multipliy matrices of wrong dimensions')
+        # special check for empty matrices
+        if self.cols == 0 or self.rows == 0 or other.rows == 0 or other.cols == 0:
+            return zeromatrix(self.rows, other.cols)
+        result = []
+        for i in range(self.rows):
+            row = []
+            for j in range(other.cols):
+                s = self[i][0] * other[0][j]  # makes sure s has right type
+                for k in range(1, self.cols):
                     s += self[i][k] * other[k][j]
                 row.append(s)
-            newentries.append(row)
-        return Matrix(newentries)
+            result.append(row)
+        return Matrix(self.rows, other.cols, result)
     
+    # compares two matrices entrywise
     def __eq__(self, other):
-        if self.height != other.height or self.width != other.width:
+        if self.rows != other.rows or self.cols != other.cols:
                 return False
-        for i in range(self.height):
-            for j in range(self.width):
+        for i in range(self.rows):
+            for j in range(self.cols):
                 if self[i][j] != other[i][j]:
                     return False
         return True
     
-    def mapentries(self, f):        # applies a function to all entries
-        A = zeromatrix(self.height, self.width) # zeromatrix is defined below
-        for i in range(self.height):
-            for j in range(self.width):
-                A[i][j] = f(self[i][j])
-        return A
+    # add row i -> i + c*j
+    def addrowtofrom(self, i, j, c):
+        for k in range(self.cols):
+            # make c responsible for implementing the multiplication
+            self[i][k] =  c * self[j][k] +  self[i][k]
     
-    def addrow(self, i, j, c):      # add c times row j to row i
-        for k in range(self.width):
-            self[i][k] =  c * self[j][k] + self[i][k]
-            # makes c responsible for implementing the operations
-    
-    def addcolumn(self, i, j, c):   # add c times column j to column i
-        for k in range(self.height):
+    # add column i -> i + c*j
+    def addcolumntofrom(self, i, j, c):
+        for k in range(self.rows):
+            # make c responsible for implementing the multiplication
             self[k][i] = c * self[k][j] + self[k][i]
     
-    def multrow(self, i, c):        # multiply row i with c
-        for j in range(self.width):
-            self[i][j] = c * self[i][j]
-            
-    def multcolumn(self, j, c):     # multiply row j with c
-        for i in range(self.height):
+    # multiply row i -> c*i
+    def multrow(self, i, c):
+        for j in range(self.cols):
             self[i][j] = c * self[i][j]
     
-    def swaprows(self, i, j):       # swap rows i and j
-        if i > self.height or j > self.height:
-            raise ValueError("swap nonexistent rows")
-        l = self[i]
+    # multipliy column j -> c*j
+    def multcolumn(self, j, c):
+        for i in range(self.rows):
+            self[i][j] = c * self[i][j]
+    
+    # swap rows i <-> j
+    def swaprows(self, i, j):
+        temp = self[i]
         self[i] = self[j]
-        self[j] = l
+        self[j] = temp
     
-    def transpose(self):
-        T = zeromatrix(self.width, self.height)
-        for i in range(self.height):
-            for j in range(self.width):
-                T[j][i] = self[i][j]
-        return T
+    # swap columns i <-> j
+    def swapcolumns(self, i, j):
+        for k in range(self.rows):
+            temp = self[k][i]
+            self[k][i] = self[k][j]
+            self[k][j] = temp
+
+
 
 
 
 ### AUXILIARY MATRIX FUNCTIONS
 
-def zeromatrix(height, width):  # creates a zero matrix
+# creates a zero matrix of given height and width
+def zeromatrix(height, width):  
     entries = []
     for i in range(height):
         entries.append([0]*width)
-    return Matrix(entries)
+    return Matrix(height, width, entries)
 
-def identitymatrix(size):       # creates an identiy matrix
+# creates an identiy matrix of given square size
+def identitymatrix(size):
     E = zeromatrix(size, size)
     for i in range(size):
         E[i][i] = 1
     return E
+
+# creates the transposed matrix
+def transpose(A):
+    m = A.height()
+    n = A.width()
+    result = []
+    for i in range(m):
+        row = []
+        for j in range(n):
+                row.append(A[j][i])
+        result.append(row)
+    return Matrix(n, m, result)
+
+# creates a new matrix by applying a function entrywise to a given matrix
+def mapentries(A, f):
+    m = A.height()
+    n = A.width()
+    result = []
+    for i in range(m):
+        row = []
+        for j in range(n):
+            row.append(f(A[i][j]))
+        result.append(row)
+    return Matrix(m, n, result)

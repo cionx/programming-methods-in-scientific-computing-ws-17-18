@@ -1,15 +1,16 @@
-### Exercise 3.9 (1)
+### (1)
 
 from trapeze import powertrapeze
 
 from math import sin, pi
 m = 10
 results = powertrapeze(sin, 0, pi, m)
-print("Calculate trapeze estimate for int. of sin from 0 to pi, 2^m intervals:")
+print("Calculate trapeze estimate for sin(x) from 0 to pi, 2^m intervals:")
 print(" m \testimate \t\terror")
 for i in range(m):
     print("{:2d}\t{}\t{:.20f}".format(i+1, results[i], 2-results[i]))
 
+### OUTPUT:
 #   Calculating trapeze estimate for integral of sin from 0 to pi with 2^m intervals:
 #    m      estimate                error
 #    1      1.5707963267948966      0.42920367320510344200
@@ -25,15 +26,16 @@ for i in range(m):
 
 
 
-### Exercise 3.9 (2)
+### (2)
 
-#   The error gets divided by 4.
+# See notes for an assumption on the convergence speed.
 
 print("Quotients of any two subsequent differences of estimates:")
 for i in range(m-2):
     q = (results[i] - results[i+1]) / (results[i+1] - results[i+2])
     print(q)
 
+### OUTPUT:
 #   Quotients of any two subsequent differences of estimates:
 #   4.164784400584785
 #   4.039182316416593
@@ -44,20 +46,18 @@ for i in range(m-2):
 #   4.000037649528035
 #   4.000009414842847
 
-#   The quotients goes to 4.
 
-
-
-### Exercise 3.9 (3)
+### (3)
 
 m = 10
 f = (lambda x : 3**(3*x-1))
 results = powertrapeze( f, 0, 2, m)
-print("Calculate trapeze estimate for int. of 3^(3x-1) from 0 to 2, 2^m intervals:")
+print("Calculate trapeze estimate for 3^(3x-1) from 0 to 2, 2^m intervals:")
 print(" m \testimate")
 for i in range(m):
     print("{:2d}\t{:24.20f}".format(i+1, results[i]))
 
+#   OUTPUT:
 #   Calculating trapeze estimate for integral of 3^(3x-1) from 0 to 2 with 2^m intervals:
 #    m      estimate
 #    1      130.66666666666665719276
@@ -76,6 +76,7 @@ for i in range(m-2):
     q = (results[i] - results[i+1])/(results[i+1] - results[i+2])
     print(q)
 
+#   OUTPUT:
 #   Quotients of any two subsequent differences of estimates:
 #   3.471562932248868
 #   3.841500716121706

@@ -1,10 +1,10 @@
-### Exercise 3.8 (1)
+### (1)
 
 from trapeze import trapeze
 
 
 
-### Exercise 3.8 (2)
+### (2)
 
 from math import sin, pi
 n = 1
@@ -16,5 +16,6 @@ while 2 - s >= 1.E-6:   # sin is concave on [0,pi] -> estimate too small
 print("Estimate for integral of sin from 0 to pi using trapeze:")
 print(s)
 
+### OUTPUT:
 #   Estimate for integral of sin from 0 to pi using trapeze:
 #   1.9999990007015205

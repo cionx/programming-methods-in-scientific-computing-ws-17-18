@@ -17,7 +17,7 @@ Hiermit berechnen die Approximationen für $\int_0^\pi \sin(x) \,\text{d}x$ für
 
 Wir erhalten den folgenden Output:
 \begin{consoleoutput}
-Calculate trapeze estimate for int. of sin from 0 to pi, 2^m intervals:
+Calculate trapeze estimate for sin(x) from 0 to pi, 2^m intervals:
  m      estimate                error
  1      1.5707963267948966      0.42920367320510344200
  2      1.8961188979370398      0.10388110206296019555
@@ -37,12 +37,12 @@ Calculate trapeze estimate for int. of sin from 0 to pi, 2^m intervals:
 
 \subsection{}
 
-Es fällt auf, dass sich der Fehler in jedem Schritt etwa geviertelt wird.
+Es fällt auf, dass der Fehler in jedem Schritt etwa geviertelt wird.
 Bezeichnet $a_n$ die $n$-te Approximation, so gilt $a_0 \leq a_1 \leq \dotsb \leq a_n$, da $\sin$ auf $[0,\pi]$ konkav ist.
-Deshalb ist die Vermutung äquivalent dazu, dass die Quotienten $(a_i - a_{i+1})/(a_{i+1} - a_{i+2})$ ungefähr $4$ sind.
+Deshalb ist die Vermutung äquivalent dazu, dass die Quotienten $(a_i - a_{i+1})/(a_{i+1} - a_{i+2})$ näherungsweise $4$ sind.
 Dies testen wir mit dem folgenden weiteren Code:
 
-\lstinputlisting[style=pythoncode, firstline = 32, lastline = 35]{chapter_03/exercise_03_09.py}
+\lstinputlisting[style=pythoncode, firstline = 33, lastline = 36]{chapter_03/exercise_03_09.py}
 
 Wir erhalten den folgenden Output:
 
@@ -58,7 +58,7 @@ Quotients of any two subsequent differences of estimates:
 4.000009414842847
 \end{consoleoutput}
 
-Es fällt auf, dass das Verhältnis sogar gegen $4$ zu gehen scheint.
+Es fällt auf, dass das Verhältnis tasächlich gegen $4$ zu gehen scheint.
 
 
 
@@ -68,7 +68,7 @@ Es fällt auf, dass das Verhältnis sogar gegen $4$ zu gehen scheint.
 
 Wir berechnen die Approximationen für $\int_0^2 3^{3x-1} \,\text{d}x$ für $m = 1, \dotsc, 10$ mit dem folgenden Code:
 
-\lstinputlisting[style=pythoncode, firstline = 53, lastline = 59]{chapter_03/exercise_03_09.py}
+\lstinputlisting[style=pythoncode, firstline = 52, lastline = 58]{chapter_03/exercise_03_09.py}
 
 Wir erhalten den folgenden Output:
 

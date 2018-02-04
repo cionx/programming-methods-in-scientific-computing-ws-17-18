@@ -1,30 +1,28 @@
 \section{}
 
-Ist $T_n(x) = \sum_{k=0}^n x^k/k!$ das $k$-te Taylorpolynom für $f(x) = e^x$ an der Entwicklungsstelle $0$, so gilt für das Restglied $R_n(x) \coloneqq e^x - T_n(x)$, dass es für jedes $x \in \Real$ ein $\xi$ zwschen $0$ und $x$ gibt, so dass
+Ist $T_n(x) = \sum_{k=0}^n x^k/k!$ das $k$-te Taylorpolynom der Funktion $f(x) = e^x$ an der Entwicklungsstelle $0$, so gilt für das Restglied $R_n(x) \coloneqq e^x - T_n(x)$, dass es für jedes $x \in \Real$ ein $\xi$ zwschen $0$ und $x$ gibt, so dass
 \[
     R_n(x)
   = \frac{f^{(n+1)}(\xi)}{(n+1)!} \xi^n
-  = \frac{e^\xi \xi^n}{(n+1)^!}\,.
+  = \frac{e^\xi \xi^n}{(n+1)^!} \,.
 \]
-Für alle $x \geq 0$ gilt $e^\xi \leq e^x \leq 3^x$, und somit gilt
+Für $x \geq 0$ gilt dann $e^\xi 3^m$ für $m \coloneqq \lceil x \rceil$, und somit
 \[
         \abs{R_n(x)}
-  \leq  \frac{3^x x^n}{(n+1)^!}
-  \qquad
-  \text{für alle $x \geq 0$}\,.
+  \leq  \frac{3^m x^n}{(n+1)!} \,.
 \]
-Für alle $x \leq 0$ gilt $e^\xi \leq e^0 = 1$, und somit
+Für $x \leq 0$ gilt $e^\xi \leq e^0 = 1$, und somit
 \[
         \abs{R_n(x)}
-  \leq  \frac{(-x)^n}{(n+1)^!}\,.
+  \leq  \frac{(-x)^n}{(n+1)^!} \,.
 \]
 Dies führt zu dem folgenden Code:
 
-\lstinputlisting[style=pythoncode, firstline = 3, lastline = 18]{chapter_03/exercise_03_11.py}
+\lstinputlisting[style=pythoncode, firstline = 3, lastline = 21]{chapter_03/exercise_03_11.py}
 
 Wir testen die Genauigkeit des Programms mit dem folgenden Code:
 
-\lstinputlisting[style=pythoncode, firstline = 22, lastline = 28]{chapter_03/exercise_03_11.py}
+\lstinputlisting[style=pythoncode, firstline = 27, lastline = 34]{chapter_03/exercise_03_11.py}
 
 Wir erhalten den folgenden (gekürzten) Output:
 \begin{consoleoutput}
