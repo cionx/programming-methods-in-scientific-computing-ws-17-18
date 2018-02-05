@@ -10,7 +10,13 @@ Wir testen, für welche Werte von $\alpha$ die Determinante von $A$ verschwindet
 
 \lstinputlisting[style=pythoncode, firstline = 1, lastline = 8]{chapter_05/exercise_05_24.py}
 
-Als Ergebnis erhalten wir \texttt{\{-3\}}.
+Wir erhalten den folgenden Output:
+
+\begin{consoleoutput}
+The kernel is nonzero for the following values of alpha:
+{-3}
+\end{consoleoutput}
+
 Somit hat das lineare Gleichungssystem $Ax = 0$ nur für $\alpha = -3$ nicht-triviale Lösungen.
 
 
@@ -31,9 +37,14 @@ Nach dem vorherigen Aufgabenteil gilt dies nur für $\alpha = -3$.
 Für $\alpha \neq -3$ ist die Matrix invertierbar, sodass das Gleichungssystem $Ax = b$ dann für jedes $\beta \in \Real$ eine eindeutige Lösung hat.
 Für $\alpha = 3$ hat die Matrix $A$ immer noch Rang $2$, weshalb sich die Werte für $\beta$ in diesem Fall wie folgt bestimmen lässt:
 
-\lstinputlisting[style=pythoncode, firstline = 10, lastline = 13]{chapter_05/exercise_05_24.py}
+\lstinputlisting[style=pythoncode, firstline = 14, lastline = 17]{chapter_05/exercise_05_24.py}
 
-Wir erhalten den Wert $\beta = 0$.
+Wir erhalten den folgende Output:
+
+\begin{consoleoutput}
+For alpha = -3 there exists a solution for the following values of beta:
+{0}
+\end{consoleoutput}
 
 
 
@@ -43,9 +54,15 @@ Wir erhalten den Wert $\beta = 0$.
 
 Für $\alpha = -3$, $\beta = 0$ berechnen wir die Lösungen für $Ax = b$ mit \texttt{linsolve}:
 
-\lstinputlisting[style=pythoncode, firstline = 15, lastline = 16]{chapter_05/exercise_05_24.py}
+\lstinputlisting[style=pythoncode, firstline = 23, lastline = 24]{chapter_05/exercise_05_24.py}
 
-Als Lösung erhalten wir \texttt{\{(z, -2*z + 3, z)\}}.
+Wir erhalten den folgenden Output:
+
+\begin{consoleoutput}
+For alpha = -3, beta = 0 the solutions are given by the following set:
+{(z, -2*z + 3, z)}
+\end{consoleoutput}
+
 
 
 

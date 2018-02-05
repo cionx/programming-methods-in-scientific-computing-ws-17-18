@@ -1,29 +1,30 @@
-from sympy import symbols, Matrix
+from sympy import *
 
 class TimeOutError(Exception):
     pass
 
-# expect f to be a matrix
+# f   : a matrix of expressions
+# var : list of appearing variables
 def newton(f, var, x0):
     n = len(var)
     if n != len(f):
         raise ValueError("wrong function type")
     Df = Matrix(n, n, (lambda i,j: f[i].diff(var[j])))
-    def g(x):
+    def g(x):   # make f into a function
         sublist = list(zip(var, x))
         substitutor = (lambda e: e.subs( sublist ))
         return f.applyfunc( substitutor )
-    def Dg(x):
+    def Dg(x):  # make Df into a function
         sublist = list(zip(var, x))
         substitutor = (lambda e: e.subs( sublist ))
         return Df.applyfunc( substitutor )
-    n = 1
-    xold = x0
-    xnew = x0
+    eps = 1.E-7 # when to stop
+    xold = x0   # current value
+    n = 1       # current iteration
     while n <= 100:
         D = Dg(xold)
         xnew = xold - D**(-1) @ g(xold)
-        if (xnew - xold).norm() < 1e-6:
+        if (xnew - xold).norm() < eps:
             return xnew
         xold = xnew
         n += 1
@@ -38,3 +39,11 @@ x0 = [ Matrix([1,1,0]), Matrix([1,-1,0]), Matrix([-1,1,0]), Matrix([-1,-1,0]) ]
 print("initial value \t\t\troot")
 for i in range(4):
     print( "{} \t{}". format(x0[i], newton(f, [x,y,z], x0[i]).applyfunc(float)) )
+
+### OUTPUT
+#   initial value                   root
+#   Matrix([[1], [1], [0]])         Matrix([[0.893628234476483], [0.894527010390578], [-0.0400892861591528]])
+#   Matrix([[1], [-1], [0]])        Matrix([[0.893628234476483], [-0.894527010390578], [-0.0400892861591528]])
+#   Matrix([[-1], [1], [0]])        Matrix([[-0.893628234476483], [0.894527010390578], [-0.0400892861591528]])
+#   Matrix([[-1], [-1], [0]])       Matrix([[-0.893628234476483], [-0.894527010390578], [-0.0400892861591528]])
+

@@ -1,8 +1,11 @@
-from sympy import symbols, solveset, plot
+from sympy import *
 
-a, x = symbols('a x', real=True)
+a, x = symbols('a x')
 sol = solveset(x**3 + 3*x - a, x)
 print(sol)
+
+### OUTPUT:
+#   {-(-1/2 - sqrt(3)*I/2)*(-27*a/2 + sqrt(729*a**2 + 2916)/2)**(1/3)/3 + 3/((-1/2 - sqrt(3)*I/2)*(-27*a/2 + sqrt(729*a**2 + 2916)/2)**(1/3)), -(-1/2 + sqrt(3)*I/2)*(-27*a/2 + sqrt(729*a**2 + 2916)/2)**(1/3)/3 + 3/((-1/2 + sqrt(3)*I/2)*(-27*a/2 + sqrt(729*a**2 + 2916)/2)**(1/3)), -(-27*a/2 + sqrt(729*a**2 + 2916)/2)**(1/3)/3 + 3/(-27*a/2 + sqrt(729*a**2 + 2916)/2)**(1/3)}
 
 f = list(sol)[0]
 plot(f, (a, -500, 500))
