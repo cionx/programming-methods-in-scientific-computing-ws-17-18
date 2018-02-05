@@ -1,14 +1,14 @@
 \section{}
 
-Da wir weniger als $4$ Punkte haben, können wir ein entsprechendes quadratisches Polynom interpolieren:
+Wir können die gegebenen drei Punkte bereits durch ein quadratisches Polynom interpolieren:
 
 \lstinputlisting[style=pythoncode, firstline = 1, lastline = 23]{chapter_09/exercise_09_50.py}
 
 Wir erhalten damit das folgende Polynom:
 
 \begin{consoleoutput}
-$ python exercise_09_50.py 
 -2*x**2 + 9*x - 6
 \end{consoleoutput}
 
-Da wir keinen Zugriff auf Maple haben, konnen wir nicht überprüfen, welche Lösung Maple wählt.
+Da wir keinen Zugriff auf eine Maple-Installation haben, können wir nicht überprüfen, wie Maple die Splines wählt.
+Unsere Implementation minimiert den Grad der genutzten Polynome.

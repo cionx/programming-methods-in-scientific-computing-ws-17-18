@@ -7,21 +7,22 @@ def inner(f,g):
     return integrate(f*g,(x,-1,1))
 
 # copied from chapter 5, exercise 32
-# calculates the first n legendre polynomials of even degree
-def legendre(n):
-    p = [x**(2*i) for i in range(n)] # to be orthogonalized
-    normsq = [] # list of squares of norms
-    for i in range(n):
-        s = 0   # projection onto previous polynomials
+# calculates the even legendre polynomials of degree <= n
+def legendreeven(n):
+    m = n//2 + 1  # number of polynomials to be computed
+    p = [x**(2*i) for i in range(m)]  # to be orthogonalized
+    normsq = []  # list of squares of norms
+    for i in range(n//2 + 1):
+        s = 0  # projection onto previous polynomials
         for j in range(i):
             s += inner(p[i], p[j])/normsq[j] * p[j]
         p[i] -= s
         normsq.append( inner(p[i], p[i]) )
     return p
 
-# returns the first n approximations
+# returns the first approximations of even degree <= n
 def approx(n):
-    L = legendre(n)
+    L = legendreeven(n)
     approxlist = []
     p = 0   #current approximation
     for q in L:
@@ -31,13 +32,13 @@ def approx(n):
 
 
 
-n = 20 # number of approximations
-approxlist = approx(n)
+nlist = [5, 11, 17]
+approxlist = approx(max(nlist))
 
 # (a)
-for i in [5, 11, 17]:
-    plot(approxlist[i], (x, -1, 1))
+for n in nlist:
+    plot(approxlist[n//2], (x, -1, 1))
 
 # (b)
-for p in [5, 11, 17]:
-    plot(approxlist[i] - f, (x, -1, 1))
+for n in nlist:
+    plot(approxlist[n//2] - f, (x, -1, 1))

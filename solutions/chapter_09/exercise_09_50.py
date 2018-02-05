@@ -2,7 +2,7 @@ from sympy import *
 
 x = symbols('x');
 
-#   tries to interpolate the given points by a polynomial of degree d
+#   tries to interpolate the given points by a polynomial of degree deg
 #   only works because we have less pants then the degree
 
 xval = [1,2,3]

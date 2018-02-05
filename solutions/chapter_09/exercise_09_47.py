@@ -8,8 +8,8 @@ def rungepolate(n):
     
     xval = [ -1 + i*sympify(2)/n for i in range(n+1) ]
     yval = [f(z) for z in xval]
-    pts = list(zip(xval,yval))
-    poly = interpolate(pts, x)  # sympy interpolate
+    points = list(zip(xval,yval))
+    poly = interpolate(points, x)  # sympy interpolate
     
     return poly
 
