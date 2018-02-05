@@ -40,8 +40,7 @@ int main(){
   }
   
   // output
-  std::cout << std::fixed;
-  std::cout << std::setprecision(8);
+  std::cout << std::fixed << std::setprecision(8);
   std::cout << "x\t\t  approximation\t  exact" << std::endl;
   double x = 0; // current position
   for(int i = 0; i < n; i++){

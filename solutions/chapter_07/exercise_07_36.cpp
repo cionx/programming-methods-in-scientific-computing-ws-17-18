@@ -48,8 +48,7 @@ int main(){
     u[i+1] = u_right[i];
 
   //  printing results  
-  std::cout << std::fixed;
-  std::cout << std::setprecision(6);
+  std::cout << std::fixed << std::setprecision(6);
   x = 0; //  current point, variable already initialized before
   std::cout << "x\t\t   approx\t   exact" << std::endl;
   for(int i = 0; i < n; i++){

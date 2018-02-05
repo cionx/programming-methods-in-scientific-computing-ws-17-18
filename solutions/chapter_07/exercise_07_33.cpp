@@ -1,5 +1,6 @@
 #include <cmath>
 #include <iostream>
+#include <iomanip>
 
 #define PI 3.14159265358979323846
 
@@ -18,7 +19,15 @@ double simpson(double f(double), double a, double b, int n){
 }
 
 int main(){
-  std::cout.precision(10); // set output precision
-  std::cout << simpson(sin,0,PI,2000) << std::endl;
+  double eps = 1.E-6;
+  int n = 0;
+  double y = 0;
+  do {
+    n++;
+    y = simpson(sin,0,PI,n);
+  }
+  while( 2-y >= eps );
+  std::cout << std::fixed << std::setprecision(10);
+  std::cout << simpson(sin,0,PI,n) << std::endl;
 	return 0;
 }
