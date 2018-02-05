@@ -1,24 +1,22 @@
-### Newton method from exercise 3.12
+### newton method from exercise 3.12
 
 class TimeOutError(Exception):
     pass
 
 def newton(f, f_prime, x):
-    n = 1
-    xold = x
-    xnew = x
+    eps = 1.E-7 # when to stop
+    xold = x    # current position
+    n = 1       # current iteration
     while n <= 100:
         d = f_prime(xold)
         if d == 0:
             raise ZeroDivisionError("derivative vanishes at {}".format(xold))
         xnew = xold - f(xold)/d
-        if abs(xnew - xold) <= 1.E-7:
+        if abs(xnew - xold) < eps:
             return xnew
         xold = xnew
         n += 1
     raise TimeOutError("the calculation takes too long")
-
-
 
 ### new Newton method
 
@@ -29,6 +27,7 @@ def newton_ext(f, x):
     fprime = prime(f)
     return newton(f, fprime, x)
 
+# the following code does not execute when this file is imported
 if __name__ == "__main__":
 
     from scipy import exp, linspace
@@ -36,16 +35,18 @@ if __name__ == "__main__":
 
     def f(x): return exp(x) + 2*x
 
+    # plotting the function
     x = linspace(-1, 1, 100)
     plt.clf()
-    plt.grid()
     plt.plot(x, f(x), color="b")
+    plt.grid()
     plt.show()
 
-    x0 = 1
+    x0 = -0.25
     def fprime(x): return exp(x) + 2
     print("With the exact derivative we get a root at      {}.".format(newton(f, fprime, x0)))
     print("With an approximate derivative we get a root at {}.".format(newton_ext(f, x0)))
-
-    #   With the exact derivative we get a root at      -0.3517337112491958.
-    #   With an approximate derivative we get a root at -0.3517337112491958.
+    
+    ### OUTPUT:
+    #   With the exact derivative we get a root at      -0.35173371124919584.
+    #   With an approximate derivative we get a root at -0.35173371124919584.

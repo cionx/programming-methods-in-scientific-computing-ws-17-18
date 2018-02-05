@@ -28,7 +28,7 @@ x, y = meshgrid(x, y)
 surf = ax.plot_surface(x, y, L, rstride=1, cstride=1, cmap=cm.jet, linewidth=0)
 plt.show()
 
-# exact solution
+# plotting the exact solution
 
 from poissonsolver import *
 f = (lambda x,y: 0)

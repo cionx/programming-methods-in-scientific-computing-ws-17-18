@@ -5,13 +5,13 @@ class TimeOutError(Exception):
     pass
 
 def newton(f, Df, x):
-    n = 1
-    xold = x
-    xnew = x
+    eps = 1.E-6 # when to stop
+    xold = x    # current value
+    n = 1       # current iteration
     while n <= 100:
         D = Df(xold)
         xnew = xold - inv(D) @ f(xold)
-        if norm(xnew - xold) <= 1e-6:
+        if norm(xnew - xold) < eps:
             return xnew
         xold = xnew
         n += 1
@@ -28,19 +28,17 @@ def f(p):
 
 def J(p):
   (x,y,z) = p
-  A = zeros((3,3))
-  A[0,0] = 18*x
-  A[0,1] = 72*y
-  A[0,2] = 8*z
-  A[1,0] = 2*x
-  A[1,1] = -4*y
-  A[1,2] = -20
-  A[2,0] = 2*x
-  A[2,1] = -2*y
-  A[2,2] = 2*z
-  return A
+  D = array([[18*x, 72*y, 8*z], [2*x,-4*y,-20],[2*x,-2*y,2*z]])
+  return D
 
 x0 = [(1,1,0), (1,-1,0), (-1,1,0), (-1,-1,0)]
 print("initial value\troot")
 for i in range(4):
     print( "{}\t{}.".format(x0[i], newton(f, J, x0[i])) )
+
+### OUTPUT:
+#   initial value   root
+#   (1, 1, 0)       [ 0.89362823  0.89452701 -0.04008929].
+#   (1, -1, 0)      [ 0.89362823 -0.89452701 -0.04008929].
+#   (-1, 1, 0)      [-0.89362823  0.89452701 -0.04008929].
+#   (-1, -1, 0)     [-0.89362823 -0.89452701 -0.04008929].

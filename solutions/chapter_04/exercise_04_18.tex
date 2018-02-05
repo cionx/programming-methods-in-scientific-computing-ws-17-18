@@ -2,20 +2,19 @@
 
 Wir nutzen die folgende Funktion, um eine gegebene quadratische Matrix $A$ als $A = L + D + U$ wie in der Aufgabenstellung zu zerlegen:
 
-\lstinputlisting[style=pythoncode, firstline = 4, lastline = 15]{chapter_04/exercise_04_18.py}
+\lstinputlisting[style=pythoncode, firstline = 4, lastline = 16]{chapter_04/exercise_04_18.py}
 
 Wir bestimmen nun zunächst die exakte Lösung mithilfe des folgenden Codes:
 
-\lstinputlisting[style=pythoncode, firstline = 17, lastline = 27]{chapter_04/exercise_04_18.py}
+\lstinputlisting[style=pythoncode, linerange={18-24, 32-35}]{chapter_04/exercise_04_18.py}
 
 Anschließend berechnen wir mithilfe des Gauß-Seidel-Algorithmus eine approximative Lösung:
 
-\lstinputlisting[style=pythoncode, firstline = 29, lastline = 38]{chapter_04/exercise_04_18.py}
+\lstinputlisting[style=pythoncode, firstline = 41, lastline = 50]{chapter_04/exercise_04_18.py}
 
 Wir erhalten den folgenden Output:
 
 \begin{consoleoutput}
-$ python exercise_04_18.py
 A:
 [[ 4  3  0]
  [ 3  4 -1]

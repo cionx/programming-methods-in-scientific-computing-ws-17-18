@@ -9,14 +9,13 @@ Der Vollständigkeit halber betrachten wir beide Formulierungen.
 
 Wir nutzen den folgenden Code:
 
-\lstinputlisting[style=pythoncode, firstline = 1, lastline = 25]{chapter_04/exercise_04_22_new.py}
+\lstinputlisting[style=pythoncode, firstline = 1, lastline = 28]{chapter_04/exercise_04_22_new.py}
 
 Wir erhalten damit die folgenden Lösungsgraphen:
 
 \begin{center}
-  \includegraphics[width = 0.8\textwidth]{chapter_04/exercise_04_22_figure_3.pdf}
+  \includegraphics[width = 0.7\textwidth]{chapter_04/exercise_04_22_figure_3.pdf}
 \end{center}
-
 
 
 
@@ -30,7 +29,7 @@ Das gegebene Randwertproblem
   \quad u(0) =  0,
   \quad u(4) = -2
 \]
-für $u \in C^1[0,1]$ hat, entgegen der Aufgabenstellung, keine Lösung:
+für $u \in C^1[0,1]$ hat keine Lösung:
 
 Die Funktion $u$ wäre monoton fallend, da $u'(x) = -|u(x)| \leq 0$ für alle $x \in [0,4]$ gilt.
 Daher ist
@@ -70,19 +69,19 @@ im Widerspruch zu $x_0 \notin I$.
 Unsere obige Argumentation spiegelt sich auch in dem Verhalten von \texttt{scipy} wieder:
 Das folgende Programm würde eine Lösung der Differenzgliechung liefern und plotten:
 
-\lstinputlisting[style=pythoncode, firstline = 1, lastline = 21]{chapter_04/exercise_04_22_old.py}
+\lstinputlisting[style=pythoncode, firstline = 1, lastline = 22]{chapter_04/exercise_04_22_old.py}
 
 Wir erhalten den folgenden Graphen:
 
 \begin{center}
-  \includegraphics[width = 0.8\textwidth]{chapter_04/exercise_04_22_figure_1.pdf}
+  \includegraphics[width = 0.7\textwidth]{chapter_04/exercise_04_22_figure_1.pdf}
 \end{center}
 
 Die Randbedingung $u(4) = -2$ wird zwar beachtet, die Randbedingung $u(0) = 0$ hingegen nicht.
-Der eingezeichnete Graph ist, entsprechend der obigen Argumentation, der von $-2 e^{x-4}$, wie aus dem folgenden Bild hervorgeht:
+Der eingezeichnete Graph ist, wie auch aus der obigen Argumentation hervorgeht, der Graph von $-2 e^{x-4}$:
 
 \begin{center}
-  \includegraphics[width = 0.8\textwidth]{chapter_04/exercise_04_22_figure_2.pdf}
+  \includegraphics[width = 0.7\textwidth]{chapter_04/exercise_04_22_figure_2.pdf}
 \end{center}
 
 

@@ -11,7 +11,7 @@ Wir testen die beiden Funktionen an der gegebenen Funktion
 \]
 Hierfür plotten wir die Funktion zunächst mithilfe des folgenden Codes:
 
-\lstinputlisting[style=pythoncode, firstline = 23, lastline = 31]{chapter_04/exercise_04_13.py}
+\lstinputlisting[style=pythoncode, firstline = 23, lastline = 32]{chapter_04/exercise_04_13.py}
 
 Wir wählen das Intervall $[-1.1, 1.1]$, da die Funktion $f$ außerhalb dieses Intervalls zu groß wird.
 Wir erhalten den folgenden Graphen:
@@ -23,12 +23,11 @@ Wir erhalten den folgenden Graphen:
 Anhand des Graphen sind zwei Nullstellen zu erkennen, jeweils in der Nähe von $-1$ und $0.4$.
 Wir berechnen die Nullstellen nun mit dem folgenden Code:
   
-\lstinputlisting[style=pythoncode, linerange={33-34, 38-39}]{chapter_04/exercise_04_13.py}
+\lstinputlisting[style=pythoncode, linerange={34-36, 39-41}]{chapter_04/exercise_04_13.py}
 
-Wir erhalten in der Konsole den folgende Output:
+Wir erhalten den folgenden Output:
 
 \begin{consoleoutput}
-$ python exercise_04_13.py
 The roots with bisect_it are -1.002246916294098 and 0.4082937240600586.
 The roots with bisect_rec are -1.002246916294098 and 0.4082937240600586.
 \end{consoleoutput}

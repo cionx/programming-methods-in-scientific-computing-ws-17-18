@@ -28,14 +28,17 @@ def f(x): return sin(4*x-1)+ x + x**20 - 1
 x = linspace(-1.1, 1.1, 100)
 plt.clf()
 plt.plot(x, f(x))
+plt.grid()
 plt.show()
 
 xit1, xit2 = bisect_it(f, 0, -1.5), bisect_it(f,0,1)
 print("The roots with bisect_it are {} and {}.".format(xit1, xit2))
 
-#     The roots with bisect_it are -1.002246916294098 and 0.4082937240600586.
+### OUTPUT:
+#   The roots with bisect_it are -1.002246916294098 and 0.4082937240600586.
 
 xrec1, xrec2 = bisect_rec(f, 0, -1.5), bisect_rec(f,0,1)
 print("The roots with bisect_rec are {} and {}.".format(xrec1, xrec2))
 
-#     The roots with bisect_rec are -1.002246916294098 and 0.4082937240600586.
+### OUTPUT:
+#   The roots with bisect_rec are -1.002246916294098 and 0.4082937240600586.
